@@ -1,0 +1,17 @@
+﻿@inherits LayoutComponentBase
+
+<div class="main">
+    
+    <h1>@Resources.General.Title</h1>
+
+    <h6>
+        @(new MarkupString(Resources.General.Explanation))
+        <span class="see-below"><br/>@Resources.General.SeeBelow</span>
+    </h6>
+
+    <div class="content px-4">
+        @Body
+    </div>
+
+    <span>@Resources.General.Copyright</span>
+</div>

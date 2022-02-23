@@ -1,0 +1,97 @@
+﻿@inherits VendingMachineComponent
+@using System.Drawing
+@using VendingMachine.Domain
+@using VendingMachine.App.DomainExtensions
+@using VendingMachine.App.Components
+@page "/"
+
+    <div class="machine">
+        <img src="data:image/png;base64, @this.Machine.Color.GetImage()" 
+             title="@Resources.Tooltips.VendingMachine" 
+             id="@nameof(Domain.Machine)" alt="@Resources.Tooltips.VendingMachine"/>
+
+        @if (this.Message is null)
+        {
+            @for (var y = 0; y < this.Machine.ProductStackGridSize.Height; y++)
+            {
+                @for (var x = 0; x < this.Machine.ProductStackGridSize.Width; x++)
+                {
+                    var stack = (ProductStack?)this.Machine.ProductStacksByLocation.GetValue(x, y);
+                    if (stack != null && stack.AvailablePortions > 0)
+                    {
+                        var isSelected = this.SelectedProductStack == stack;
+                        var productSizeInPixels = GuiProduct.GetSizeInPixels(this.Machine);
+                        var stackOffset = this.Machine.GetProductStackOffsetInPixels(new Point(x, y));
+
+                        @* Available portions *@
+                        <span style="position: absolute; left:@(stackOffset.X + 5)px;top: @(stackOffset.Y)px;z-index:10;color:#080858">
+                            @(stack.AvailablePortions)x
+                        </span>
+
+                        @* Product *@
+                        <div class="product" @onclick=@(() => OnClickProductStack(stack))>
+                            <img src="data:image/png;base64, @stack.Product.Type.GetImage()" 
+                                title="@stack.Product.Type.GetName()"
+                                alt="@stack.Product.Type.GetName()"
+                                style="position: absolute; left:@(stackOffset.X)px;top: @(stackOffset.Y)px;opacity:@(isSelected ? 1 : 0.6)"
+                                class="button @(isSelected ? "product-selected" :"")"
+                                width="@productSizeInPixels.Width"
+                                height="@productSizeInPixels.Height"/>
+                        </div>
+                    }
+                }
+            }
+
+            @* Product price *@
+            <div class="product-info" style="z-index: 10; position: absolute; left:@(GuiMachine.PriceLocation.X)px;top: @(GuiMachine.PriceLocation.Y)px">
+                @this.SelectedProductStack?.Product.Price.Currency <br/>
+                @this.SelectedProductStack?.Product.Price.Amount
+            </div>
+        }
+        else
+        {
+            @* Error message *@
+            var offsetE = GuiMachine.ProductWindowOffset;
+            var sizeE = GuiMachine.ProductWindowSize;
+            <div style="position: absolute; left:@(offsetE.X)px;top: @(offsetE.Y+200)px; width: @(sizeE.Width)px; height: @(sizeE.Height)px; z-index:10; color: #ff0000;">
+                @((MarkupString)this.Message)
+            </div>
+        }
+
+        @* Buy button *@
+        @{
+            var offsetB = GuiMachine.BuyButtonOffset;
+            var sizeB = GuiMachine.BuyButtonSize;
+        }
+        <div style="position: absolute; left:@(offsetB.X)px;top: @(offsetB.Y)px; width: @(sizeB.Width)px; height: @(sizeB.Height)px; z-index:10; color: @(this.SelectedProductStack != null ? "black" : "grey"); line-height: @(sizeB.Height)px"
+            @onclick=@OnClickBuyProduct
+            title="@Resources.Tooltips.Buy"
+            class="button">
+            <strong>
+                @Resources.Tooltips.Buy.ToUpper()
+            </strong>
+        </div>
+    </div>
+
+    @* Wallets *@
+    @if (this.CoinChangeWallet != null)
+    {
+        <_Wallet Instance="this.CoinChangeWallet" 
+                LocationInPercentages="new Point(5, 55)"></_Wallet>
+    }
+
+    <_Wallet Instance="this.User.Wallet" 
+                LocationInPercentages="new Point(5, 13)" 
+                OnClick="async (coin) => await this.UserInsertsCoin(coin)"
+                Tooltip="@Resources.Tooltips.UserWallet"></_Wallet>
+
+    <div class="button">
+    <_Wallet Instance="this.Machine.UserInsertedCoinsWallet"  
+                LocationInPercentages="new Point(75, 13)" 
+                OnClick="async (coin) => await this.ReleaseCoins()"
+                Tooltip="@Resources.Tooltips.UserInsertedCoinsWallet"></_Wallet>
+    </div>
+
+    <_Wallet Instance="this.Machine.AvailableCoinsWallet" 
+                LocationInPercentages="new Point(75, 55)"></_Wallet>
+
