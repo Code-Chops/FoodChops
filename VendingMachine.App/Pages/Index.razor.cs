@@ -1,29 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Components;
 using VendingMachine.App.DomainExtensions;
 using VendingMachine.App.Services;
 using VendingMachine.Domain;
 using VendingMachine.Domain.Coins;
 
-namespace VendingMachine.App.Pages
+namespace VendingMachine.App.Pages;
+
+[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
+[SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+public class VendingMachineComponent : ComponentBase
 {
-	[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
-	[SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-	public class VendingMachineComponent : ComponentBase
-	{
 #pragma warning disable CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
-		[Inject] internal SoundPlayer SoundPlayer { get; set; }
+	[Inject] internal SoundPlayer SoundPlayer { get; set; }
         [Inject] internal Machine Machine { get; set; }
         [Inject] internal User User { get; set; }
         internal static EventHandler<VendingMachineComponent> UpdateViewHandler { get; private set; }
 #pragma warning restore CS8618 // Non-nullable field is uninitialized. Consider declaring as nullable.
 
-		internal ProductStack? SelectedProductStack { get; private set; }
+	internal ProductStack? SelectedProductStack { get; private set; }
         internal Wallet? CoinChangeWallet { get; private set; }
         internal MarkupString? Message { get; private set; }
 
@@ -118,4 +113,3 @@ namespace VendingMachine.App.Pages
             this.UpdateView();
         }
     }
-}

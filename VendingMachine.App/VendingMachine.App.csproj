@@ -1,18 +1,36 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
+    <VersionPrefix>0.5.9</VersionPrefix>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>Enable</Nullable>
+	<LangVersion>10</LangVersion>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
   </PropertyGroup>
+
+  <PropertyGroup>
+   	<Title>CodeChops.VendingMachine</Title>
+    <AssemblyName>CodeChops.VendingMachine</AssemblyName>
+    <RootNamespace>CodeChops.VendingMachine</RootNamespace>
+  	<PackageId>CodeChops.VendingMachine</PackageId>
+	<Authors>CodeChops (@Code-Chops), Max Bergman</Authors>
+    <Company>CodeChops</Company>
+  	<RepositoryUrl>https://github.com/code-chops/VendingMachine</RepositoryUrl>
+	<RepositoryType>Git</RepositoryType>
+  	<Copyright>Copyright (c) CodeChops 2022</Copyright>
+	<Description>
+A blazor server-side app which demonstrates a solution to the vending machine change problem.
+	</Description>
+  </PropertyGroup>
+
 
   <ItemGroup>
     <ProjectReference Include="..\VendingMachine.Domain\VendingMachine.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="6.3.0" />
-    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.2.0" />
     <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.5.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -91,6 +109,11 @@
       <DependentUpon>Products.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\Tooltips.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Tooltips.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\WalletName.Designer.cs">
       <DependentUpon>WalletName.resx</DependentUpon>

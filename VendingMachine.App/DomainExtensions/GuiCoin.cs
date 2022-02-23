@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using VendingMachine.App.Resources;
+﻿using VendingMachine.App.Resources;
 using VendingMachine.Domain.Coins;
 
-namespace VendingMachine.App.DomainExtensions
-{
-	internal static class GuiCoin
-	{
-		public static string GetImage(this CoinType coinType)
-		{
-			var coinImageName = $"Coin{coinType.ToString()}";
-			var image = (byte[]?)Images.ResourceManager.GetObject(coinImageName)
-						?? throw new Exception($"{nameof(coinImageName)} {coinImageName} not found.");
+namespace VendingMachine.App.DomainExtensions;
 
-			return Convert.ToBase64String(image);
-		}
+internal static class GuiCoin
+{
+	public static string GetImage(this CoinType coinType)
+	{
+		var coinImageName = $"Coin{coinType.ToString()}";
+		var image = (byte[]?)Images.ResourceManager.GetObject(coinImageName)
+					?? throw new Exception($"{nameof(coinImageName)} {coinImageName} not found.");
+
+		return Convert.ToBase64String(image);
 	}
 }

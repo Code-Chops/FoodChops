@@ -22,14 +22,14 @@ namespace CodeChops.VendingMachine.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class WalletName {
+    internal class Tooltips {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal WalletName() {
+        internal Tooltips() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace CodeChops.VendingMachine.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CodeChops.VendingMachine.Resources.WalletName", typeof(WalletName).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CodeChops.VendingMachine.Resources.Tooltips", typeof(Tooltips).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,34 +61,34 @@ namespace CodeChops.VendingMachine.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change.
+        ///   Looks up a localized string similar to Buy.
         /// </summary>
-        internal static string Change {
+        internal static string Buy {
             get {
-                return ResourceManager.GetString("Change", resourceCulture);
+                return ResourceManager.GetString("Buy", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User&apos;s wallet.
+        ///   Looks up a localized string similar to Click here to release the machine coins (cancel purchase).
         /// </summary>
-        internal static string User {
+        internal static string UserInsertedCoinsWallet {
             get {
-                return ResourceManager.GetString("User", resourceCulture);
+                return ResourceManager.GetString("UserInsertedCoinsWallet", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Inserted coins.
+        ///   Looks up a localized string similar to Click a coin to enter it into the machine.
         /// </summary>
-        internal static string UserInserted {
+        internal static string UserWallet {
             get {
-                return ResourceManager.GetString("UserInserted", resourceCulture);
+                return ResourceManager.GetString("UserWallet", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Available coins in vending machine.
+        ///   Looks up a localized string similar to Ugly vending machine.
         /// </summary>
         internal static string VendingMachine {
             get {

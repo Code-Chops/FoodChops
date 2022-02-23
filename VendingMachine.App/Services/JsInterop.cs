@@ -1,23 +1,18 @@
-﻿using System.Drawing;
-using System.Threading.Tasks;
-using Microsoft.JSInterop;
-using VendingMachine.App.DomainExtensions;
-using VendingMachine.App.Resources;
+﻿using Microsoft.JSInterop;
 
-namespace VendingMachine.App.Services
+namespace VendingMachine.App.Services;
+
+public class JsInterop
 {
-	public class JsInterop
+	private IJSRuntime JsRuntime { get; }
+
+	public JsInterop(IJSRuntime jsRuntime)
 	{
-		private IJSRuntime JsRuntime { get; }
+		this.JsRuntime = jsRuntime;
+	}
 
-		public JsInterop(IJSRuntime jsRuntime)
-		{
-			this.JsRuntime = jsRuntime;
-		}
-
-		internal async Task<string> PlaySound(string soundName)
-		{
-			return await this.JsRuntime.InvokeAsync<string>(nameof(this.PlaySound), soundName.ToString());
-		}
+	internal async Task<string> PlaySound(string soundName)
+	{
+		return await this.JsRuntime.InvokeAsync<string>(nameof(this.PlaySound), soundName.ToString());
 	}
 }

@@ -1,28 +1,25 @@
-﻿using System.Threading.Tasks;
+﻿namespace VendingMachine.App.Services;
 
-namespace VendingMachine.App.Services
+public enum SoundName
 {
-	public enum SoundName
+	CoinInsert,
+	ButtonClick,
+	CoinDrop,
+	ProductDrop,
+	Error,
+}
+
+public class SoundPlayer
+{
+	private JsInterop JsInterop { get; }
+
+	public SoundPlayer(JsInterop jsInterop)
 	{
-		CoinInsert,
-		ButtonClick,
-		CoinDrop,
-		ProductDrop,
-		Error,
+		this.JsInterop = jsInterop;
 	}
 
-	public class SoundPlayer
+	public async Task Play(SoundName name)
 	{
-		private JsInterop JsInterop { get; }
-
-		public SoundPlayer(JsInterop jsInterop)
-		{
-			this.JsInterop = jsInterop;
-		}
-
-		public async Task Play(SoundName name)
-		{
-			await this.JsInterop.PlaySound(name.ToString());
-		}
+		await this.JsInterop.PlaySound(name.ToString());
 	}
 }

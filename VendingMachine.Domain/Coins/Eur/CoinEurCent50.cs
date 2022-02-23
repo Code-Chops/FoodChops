@@ -1,13 +1,12 @@
 ﻿using VendingMachine.Helpers.Amounts;
 
-namespace VendingMachine.Domain.Coins.Eur
-{
-	public class CoinEurCent50 : CoinEurBase
-	{
-		public override CoinType RepresentedValue => CoinType.EurCent50;
+namespace VendingMachine.Domain.Coins.Eur;
 
-		public CoinEurCent50() : base(new PositiveAmount(0.50m))
-		{
-		}
+public class CoinEurCent50 : CoinEurBase
+{
+	public override CoinType RepresentedValue => CoinType.EurCent50;
+
+	public CoinEurCent50() : base(new PositiveAmount(0.50m))
+	{
 	}
 }
