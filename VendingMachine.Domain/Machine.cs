@@ -1,13 +1,12 @@
-﻿using System.Drawing;
-using VendingMachine.Domain.Coins;
-using VendingMachine.Helpers.Amounts;
+﻿using CodeChops.MagicEnums;
+using CodeChops.VendingMachine.App.Domain.Amounts;
 
-namespace VendingMachine.Domain;
+namespace CodeChops.VendingMachine.App.Domain;
 
-public enum MachineColor
+public record MachineColor : MagicStringEnum<MachineColor>
 {
-	Blue,
-	Red,
+	public static MachineColor Blue { get; }	= CreateMember();
+	public static MachineColor Red { get; }		= CreateMember();
 }
 
 public class Machine
@@ -35,16 +34,16 @@ public class Machine
 			throw new Exception("Cannot create vending machine: No product stacks are provided.");
 		}
 
-		var currenciesUsed = new[]  { availableCoinsWallet.Currency, userInsertedCoinsWallet.Currency }
+		var currenciesUsed = new[] { availableCoinsWallet.Currency, userInsertedCoinsWallet.Currency }
 			.Concat(productStacks.Select(stack => stack.Product.Price.Currency))
 			.Distinct()
-			.ToList(); 
+			.ToList();
 
-		if (currenciesUsed.Count() > 1) throw new Exception("Cannot create vending machine: The currencies of the wallets and products should be the same.");
+		if (currenciesUsed.Count > 1) throw new Exception("Cannot create vending machine: The currencies of the wallets and products should be the same.");
 		this.Currency = currenciesUsed.First();
 
 		// Put product stacks in their slot
-		var verticalProductStackCount = (int)Math.Ceiling(productStacks.Count() / (decimal)horizontalProductStackCount);
+		var verticalProductStackCount = (int)Math.Ceiling(productStacks.Count / (decimal)horizontalProductStackCount);
 		this.ProductStacksByLocation = new ProductStack[horizontalProductStackCount, verticalProductStackCount];
 		for (var i = 0; i < productStacks.Count; i++)
 		{
@@ -62,17 +61,17 @@ public class Machine
 	/// <summary>
 	/// Buy a product: checks if amount inserted is correct and returns coins if needed.
 	/// </summary>
-	/// <returns>A (fictional) wallet that shows the amount transfered</returns>
+	/// <returns>A wallet that shows the amount transfered</returns>
 	public Wallet? BuyProduct(User user, ProductStack productStack)
 	{
 		var remainingAmount = productStack.Product.Price - this.UserInsertedCoinsWallet.Amount;
-		
+
 		// Inserted too little money
 		if (remainingAmount > 0) return null;
 
 		// Transfer these coins first so also these coins can be used to give excessive coins back
-		this.UserInsertedCoinsWallet.TransferAllCoins(this.AvailableCoinsWallet);
-		
+		this.UserInsertedCoinsWallet.TransferAllCoinsTo(this.AvailableCoinsWallet);
+
 		productStack.RemoveProduct();
 
 		// Inserted too much money
@@ -82,10 +81,9 @@ public class Machine
 		}
 
 		return new Wallet(
-			name: WalletName.Change,
-			coinTypesWithQuantity: new Dictionary<CoinType, uint?>(),
+			type: WalletType.Change,
+			coinsWithQuantity: new Dictionary<Coin, uint?>(),
 			currency: this.Currency);
-
 	}
 
 	public bool HasProductsAvailable()

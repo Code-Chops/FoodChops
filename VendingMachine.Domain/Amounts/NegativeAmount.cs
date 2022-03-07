@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace VendingMachine.Helpers.Amounts;
+namespace CodeChops.VendingMachine.App.Domain.Amounts;
 
 /// <summary>
 /// A negative monetary amount.
@@ -10,7 +10,7 @@ public readonly struct NegativeAmount : IEquatable<NegativeAmount>, IComparable<
 {
 	public override string ToString() => this.ToDisplayString(CultureInfo.InvariantCulture);
 	public override int GetHashCode() => this.Value.GetHashCode();
-	public override bool Equals(object? other) => (other is NegativeAmount negativeAmount && this.Equals(negativeAmount)) || (other is Amount amount && this.Equals(amount));
+	public override bool Equals(object? other) => other is NegativeAmount negativeAmount && this.Equals(negativeAmount) || other is Amount amount && this.Equals(amount);
 	public bool Equals(NegativeAmount other) => this.Value.Equals(other.Value);
 	public int CompareTo(NegativeAmount other) => this.Value.CompareTo(other.Value);
 	public bool Equals(Amount other) => this.Value.Equals(other.Value);
@@ -29,7 +29,7 @@ public readonly struct NegativeAmount : IEquatable<NegativeAmount>, IComparable<
 	/// Constructs a new instance from the given value. The value must be negative, unless isAbsolute=true, in which case it must be positive.
 	/// </summary>
 	public NegativeAmount(decimal value, bool isAbsolute = false)
-		: this(isAbsolute ? Decimal.Negate(value) : value)
+		: this(isAbsolute ? decimal.Negate(value) : value)
 	{
 	}
 
@@ -66,7 +66,7 @@ public readonly struct NegativeAmount : IEquatable<NegativeAmount>, IComparable<
 	/// <summary>
 	/// Returns a new amount whose value equals the given number of whole cents, e.g. -115 cents is -1.15 whole units.
 	/// </summary>
-	public static NegativeAmount FromCents(long cents) => new NegativeAmount(cents / 100m);
+	public static NegativeAmount FromCents(long cents) => new(cents / 100m);
 	/// <summary>
 	/// Returns the number of whole cents equal to this amount, e.g. -1.15 whole units is -115 cents.
 	/// Throws if this amount has subcent precision.
@@ -77,7 +77,7 @@ public readonly struct NegativeAmount : IEquatable<NegativeAmount>, IComparable<
 	/// </summary>
 	public NegativeAmount RoundToCents()
 	{
-		return (NegativeAmount)Decimal.Round(this.Value, 2, MidpointRounding.AwayFromZero);
+		return (NegativeAmount)decimal.Round(this.Value, 2, MidpointRounding.AwayFromZero);
 	}
 
 	/// <summary>
@@ -85,14 +85,14 @@ public readonly struct NegativeAmount : IEquatable<NegativeAmount>, IComparable<
 	/// </summary>
 	/// <param name="provider">A format provider, such as a culture. By default, the current culture is used.</param>
 	/// <param name="format">A decimal format string. See Decimal.ToString(string). By default, F2 (financial with 2 decimals) is used.</param>
-	public string ToDisplayString(IFormatProvider provider = null, string format = "F2") => ((Amount)this).ToDisplayString(provider, format);
+	public string ToDisplayString(IFormatProvider provider = null!, string format = "F2") => ((Amount)this).ToDisplayString(provider, format);
 
 	// Implicit to decimal, and explicit from (we cannot make assumptions about the sign)
 	public static implicit operator decimal(NegativeAmount negativeAmount) => negativeAmount.Value;
-	public static explicit operator NegativeAmount(decimal negativeAmount) => new NegativeAmount(negativeAmount);
+	public static explicit operator NegativeAmount(decimal negativeAmount) => new(negativeAmount);
 
 	// Implicit to Amount, and explicit from (we cannot make assumptions about the sign)
-	public static implicit operator Amount(NegativeAmount negativeAmount) => new Amount(negativeAmount.Value);
+	public static implicit operator Amount(NegativeAmount negativeAmount) => new(negativeAmount.Value);
 	public static explicit operator NegativeAmount(Amount negativeAmount) => negativeAmount.AssumeNegative();
 
 	#region Mathematical operators

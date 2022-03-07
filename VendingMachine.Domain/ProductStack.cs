@@ -1,4 +1,4 @@
-﻿namespace VendingMachine.Domain;
+﻿namespace CodeChops.VendingMachine.App.Domain;
 
 /// <summary>
 /// A product stack is a stack of products in the vending machine (in the same compartment behind each other).

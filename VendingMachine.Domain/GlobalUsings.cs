@@ -1,0 +1,1 @@
+﻿global using Size = CodeChops.Geometry.Space.Size<int>;

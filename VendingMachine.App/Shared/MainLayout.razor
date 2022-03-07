@@ -4,14 +4,14 @@
     
     <h1>@Resources.General.Title</h1>
 
-    <h6>
+    <h4 class="explanation">
         @(new MarkupString(Resources.General.Explanation))
         <span class="see-below"><br/>@Resources.General.SeeBelow</span>
-    </h6>
+    </h4>
 
-    <div class="content px-4">
+    <div class="content">
         @Body
     </div>
-
-    <span>@Resources.General.Copyright</span>
 </div>
+
+<span class="footer">@Resources.General.Copyright</span>

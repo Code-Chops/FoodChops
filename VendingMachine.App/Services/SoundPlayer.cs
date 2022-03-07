@@ -1,12 +1,14 @@
-﻿namespace VendingMachine.App.Services;
+﻿using CodeChops.MagicEnums;
 
-public enum SoundName
+namespace CodeChops.VendingMachine.App.Services;
+
+public record SoundName : MagicStringEnum<SoundName>
 {
-	CoinInsert,
-	ButtonClick,
-	CoinDrop,
-	ProductDrop,
-	Error,
+	public static SoundName CoinInsert		{ get; } = CreateMember();
+	public static SoundName ButtonClick		{ get; } = CreateMember();
+	public static SoundName CoinDrop		{ get; } = CreateMember();
+	public static SoundName ProductDrop		{ get; } = CreateMember();
+	public static SoundName Error			{ get; } = CreateMember();
 }
 
 public class SoundPlayer
@@ -18,8 +20,9 @@ public class SoundPlayer
 		this.JsInterop = jsInterop;
 	}
 
-	public async Task Play(SoundName name)
+	public async Task Play(SoundName soundName)
 	{
-		await this.JsInterop.PlaySound(name.ToString());
+		if (soundName is null) throw new ArgumentNullException(nameof(soundName));
+		await this.JsInterop.PlaySound(soundName.ToString()!);
 	}
 }

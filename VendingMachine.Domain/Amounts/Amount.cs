@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace VendingMachine.Helpers.Amounts;
+namespace CodeChops.VendingMachine.App.Domain.Amounts;
 
 /// <summary>
 /// A monetary amount.
@@ -9,15 +9,15 @@ public readonly struct Amount : IEquatable<Amount>, IComparable<Amount>, IEquata
 {
 	public override string ToString() => this.ToDisplayString(CultureInfo.InvariantCulture);
 	public override int GetHashCode() => this.Value.GetHashCode();
-	public override bool Equals(object? other) => (other is Amount amount && this.Equals(amount)) ||
-												(other is PositiveAmount positiveAmount && positiveAmount.Equals(this)) ||
-												(other is NegativeAmount negativeAmount && negativeAmount.Equals(this));
+	public override bool Equals(object? other) => other is Amount amount && this.Equals(amount)
+												|| other is PositiveAmount positiveAmount && positiveAmount.Equals(this)
+												|| other is NegativeAmount negativeAmount && negativeAmount.Equals(this);
 	public bool Equals(Amount other) => this.Value.Equals(other.Value);
 	public int CompareTo(Amount other) => this.Value.CompareTo(other.Value);
-	public bool Equals(PositiveAmount other) => this.Value.Equals(other.Value); // This direction cannot be defined in the more specific class
-	public int CompareTo(PositiveAmount other) => this.Value.CompareTo(other.Value); // This direction cannot be defined in the more specific class
-	public bool Equals(NegativeAmount other) => this.Value.Equals(other.Value); // This direction cannot be defined in the more specific class
-	public int CompareTo(NegativeAmount other) => this.Value.CompareTo(other.Value); // This direction cannot be defined in the more specific class
+	public bool Equals(PositiveAmount other) => this.Value.Equals(other.Value);
+	public int CompareTo(PositiveAmount other) => this.Value.CompareTo(other.Value);
+	public bool Equals(NegativeAmount other) => this.Value.Equals(other.Value);
+	public int CompareTo(NegativeAmount other) => this.Value.CompareTo(other.Value);
 	public static bool operator ==(Amount one, Amount two) => one.Equals(two);
 	public static bool operator !=(Amount one, Amount two) => !(one == two);
 
@@ -25,7 +25,7 @@ public readonly struct Amount : IEquatable<Amount>, IComparable<Amount>, IEquata
 	/// The actual value, including the sign, e.g. 500.00 if positive or -500.00 if negative.
 	/// </summary>
 	public decimal Value { get; }
-	
+
 	public Amount(decimal value)
 	{
 		this.Value = value;
@@ -40,7 +40,7 @@ public readonly struct Amount : IEquatable<Amount>, IComparable<Amount>, IEquata
 	}
 	public static bool TryParse(string amountString, out Amount amount)
 	{
-		if (!Decimal.TryParse(amountString, NumberStyles.AllowLeadingSign | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out var amountDecimal))
+		if (!decimal.TryParse(amountString, NumberStyles.AllowLeadingSign | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out var amountDecimal))
 		{
 			amount = default;
 			return false;
@@ -51,7 +51,7 @@ public readonly struct Amount : IEquatable<Amount>, IComparable<Amount>, IEquata
 	/// <summary>
 	/// Returns a new amount whose value equals the given number of whole cents, e.g. 115 cents is 1.15 whole units.
 	/// </summary>
-	public static Amount FromCents(long cents) => new Amount(cents / 100m);
+	public static Amount FromCents(long cents) => new(cents / 100m);
 	/// <summary>
 	/// Returns the number of whole cents equal to this amount, e.g. 1.15 whole units is 115 cents.
 	/// Throws if this amount has subcent precision.
@@ -62,19 +62,21 @@ public readonly struct Amount : IEquatable<Amount>, IComparable<Amount>, IEquata
 	/// </summary>
 	public Amount RoundToCents()
 	{
-		return Decimal.Round(this.Value, 2, MidpointRounding.AwayFromZero);
+		return decimal.Round(this.Value, 2, MidpointRounding.AwayFromZero);
 	}
 
 	public bool IsPositive(bool includeZero = true)
 	{
 		return includeZero ? this.Value >= 0m : this.Value > 0m;
 	}
+
 	public bool IsPositive(out PositiveAmount positiveAmount, bool includeZero = true)
 	{
 		var result = this.IsPositive(includeZero);
-		positiveAmount = result ? new PositiveAmount(this.Value) : new PositiveAmount(0m);
+		positiveAmount = result ? new(this.Value) : new(0m);
 		return result;
 	}
+
 	public PositiveAmount AssumePositive()
 	{
 		if (!this.IsPositive(out var positiveAmount)) throw new InvalidOperationException("Not a positive amount.");
@@ -85,12 +87,14 @@ public readonly struct Amount : IEquatable<Amount>, IComparable<Amount>, IEquata
 	{
 		return includeZero ? this.Value <= 0m : this.Value < 0m;
 	}
+
 	public bool IsNegative(out NegativeAmount negativeAmount, bool includeZero = true)
 	{
 		var result = this.IsNegative(includeZero);
-		negativeAmount = result ? new NegativeAmount(this.Value) : new NegativeAmount(0m);
+		negativeAmount = result ? new(this.Value) : new(0m);
 		return result;
 	}
+
 	public NegativeAmount AssumeNegative()
 	{
 		if (!this.IsNegative(out var negativeAmount)) throw new InvalidOperationException("Not a negative amount.");

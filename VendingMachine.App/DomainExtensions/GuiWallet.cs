@@ -1,13 +1,13 @@
 ﻿using System.Globalization;
-using VendingMachine.Domain;
+using CodeChops.VendingMachine.App.Domain;
 
-namespace VendingMachine.App.DomainExtensions;
+namespace CodeChops.VendingMachine.App.DomainExtensions;
 
 public static class GuiWallet
 {
-	public static string GetName(this WalletName walletName, CultureInfo? culture = null)
+	public static string GetName(this WalletType walletName, CultureInfo? culture = null)
 	{
-		return Resources.WalletName.ResourceManager.GetString(walletName.ToString(), culture)
-			?? throw new Exception($"{nameof(WalletName)} {walletName} not found.");
+		return Resources.WalletName.ResourceManager.GetString(walletName.ToString()!, culture)
+			?? throw new Exception($"{nameof(WalletType)} {walletName} not found.");
 	}
 }

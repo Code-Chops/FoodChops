@@ -1,4 +1,4 @@
-Here is my Vending Machine app. It uses C# 8, .NET core 3.1 and Blazor
+Here is my Vending Machine app. It uses C# 10, .NET 6 with Blazor
 
 I wanted to show what could be possible if an official app would be written (and expanded), so therefore I added extra features.
 For example:
@@ -9,7 +9,7 @@ For example:
 - The vending machine has 2 different versions (at random): a blue and a red one
 - Resources are used to support different languages
 - TypeScript and JsInterop is used so JavaScript can play different sounds
-- The views are made 'responsive'
+- The views are made responsive
 - The component's logic is placed in a code-behind
 - The state of the view is shared between multiple clients
 

@@ -127,6 +127,6 @@
     <value>Ingeworpen geld</value>
   </data>
   <data name="VendingMachine" xml:space="preserve">
-    <value>Beschikbaar geld in verkoopautomaat</value>
+    <value>Beschikbaar geld in automaat</value>
   </data>
 </root>

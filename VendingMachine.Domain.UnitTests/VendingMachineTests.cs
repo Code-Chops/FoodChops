@@ -1,8 +1,8 @@
-using VendingMachine.Domain.Coins;
-using VendingMachine.Helpers.Amounts;
+using CodeChops.VendingMachine.App.Domain;
+using CodeChops.VendingMachine.App.Domain.Amounts;
 using Xunit;
 
-namespace VendingMachine.Domain.Tests;
+namespace CodeChops.VendingMachine.Domain.Tests;
 
 public class VendingMachineTests
 {
@@ -16,22 +16,22 @@ public class VendingMachineTests
 	public void ConstructionProductStackRowsTest(int expectedVerticalProductStackRowCount, int horizontalProductStackCount, int productStackCount)
 	{
 		var productStacks = Enumerable.Repeat(
-			element: new ProductStack(product: new Product(type: ProductType.ChickenSoup, price: new PositiveMoney(Currency.Eur, 1m)), availablePortions: 10),
+			element: new ProductStack(product: new(type: ProductType.ChickenSoup, price: new(Currency.EUR, 1m)), availablePortions: 10),
 			count: productStackCount);
 
 		var machine = new Machine(
 			productStacks.ToList(),
 			horizontalProductStackCount,
 			availableCoinsWallet: new Wallet(
-				name: WalletName.VendingMachine,
-				coinTypesWithQuantity: new Dictionary<CoinType, uint?>(),
-				Currency.Eur),
+				type: WalletType.VendingMachine,
+				coinsWithQuantity: new Dictionary<Coin, uint?>(),
+				Currency.EUR),
 			userInsertedCoinsWallet: new Wallet(
-				name: WalletName.VendingMachine,
-				coinTypesWithQuantity: new Dictionary<CoinType, uint?>(),
-				Currency.Eur),
+				type: WalletType.VendingMachine,
+				coinsWithQuantity: new Dictionary<Coin, uint?>(),
+				Currency.EUR),
 			color: MachineColor.Red);
 
-		Assert.Equal(expectedVerticalProductStackRowCount, machine.ProductStackGridSize.Height);
+		Assert.Equal(expectedVerticalProductStackRowCount, (int)machine.ProductStackGridSize.Height);
 	}
 }

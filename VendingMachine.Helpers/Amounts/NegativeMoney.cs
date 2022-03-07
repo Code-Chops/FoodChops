@@ -6,7 +6,7 @@ namespace VendingMachine.Helpers.Amounts;
 /// A currency and negative amount.
 /// Amount can be zero.
 /// </summary>
-public sealed class NegativeMoney : IEquatable<NegativeMoney>, IComparable<NegativeMoney>, IEquatable<Money>, IComparable<Money>
+public sealed record struct NegativeMoney : IEquatable<NegativeMoney>, IComparable<NegativeMoney>, IEquatable<Money>, IComparable<Money>
 	// Class instead of struct, because ORM needs to populate it from multiple columns
 {
 	public override string ToString() => $"{{{this.Currency} {this.Amount.ToDisplayString(CultureInfo.InvariantCulture, $"F{this.Currency.DecimalPlaces}")}}}";

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CodeChops.VendingMachine.Resources {
+namespace CodeChops.VendingMachine.App.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace CodeChops.VendingMachine.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CodeChops.VendingMachine.Resources.WalletName", typeof(WalletName).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CodeChops.VendingMachine.App.Resources.WalletName", typeof(WalletName).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -88,7 +88,7 @@ namespace CodeChops.VendingMachine.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Available coins in vending machine.
+        ///   Looks up a localized string similar to Available coins in machine.
         /// </summary>
         internal static string VendingMachine {
             get {

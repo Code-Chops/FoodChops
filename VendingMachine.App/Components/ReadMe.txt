@@ -1,1 +1,0 @@
-If I had more time, I would get rid of the ugly 'style=""' throughout the HTML.

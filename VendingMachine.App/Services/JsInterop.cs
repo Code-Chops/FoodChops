@@ -1,6 +1,6 @@
 ﻿using Microsoft.JSInterop;
 
-namespace VendingMachine.App.Services;
+namespace CodeChops.VendingMachine.App.Services;
 
 public class JsInterop
 {

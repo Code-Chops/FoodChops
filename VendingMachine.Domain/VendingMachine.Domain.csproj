@@ -1,6 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <AssemblyName>VendingMachine.App.Domain</AssemblyName>
+    <RootNamespace>CodeChops.VendingMachine.App.Domain</RootNamespace>
     <TargetFramework>net6.0</TargetFramework>
 	<LangVersion>10</LangVersion>
     <AnalysisLevel>latest</AnalysisLevel>
@@ -9,12 +11,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\VendingMachine.Helpers\VendingMachine.Helpers.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="System.Diagnostics.Tools" Version="4.3.0" />
-    <PackageReference Include="System.Resources.ResourceManager" Version="4.3.0" />
+    <PackageReference Include="CodeChops.MagicEnums" Version="1.0.3" />
+	<PackageReference Include="CodeChops.Geometry" Version="2.0.1" />
   </ItemGroup>
 
 </Project>

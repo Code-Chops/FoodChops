@@ -5,11 +5,11 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendingMachine.Domain", "VendingMachine.Domain\VendingMachine.Domain.csproj", "{331B7878-6AF0-46AA-A53A-285B4AC2BDAD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendingMachine.Domain.UnitTests", "VendingMachine.Domain.UnitTests\VendingMachine.Domain.UnitTests.csproj", "{39CF6C94-D1CD-41B2-B263-D63AECF10FB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendingMachine.Domain.UnitTests", "VendingMachine.Domain.Tests\VendingMachine.Domain.UnitTests.csproj", "{39CF6C94-D1CD-41B2-B263-D63AECF10FB6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendingMachine.App", "VendingMachine.App\VendingMachine.App.csproj", "{D5D07FEB-D81D-4787-817A-15A33FD11FB2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendingMachine.App.UnitTests", "VendingMachine.App.UnitTests\VendingMachine.App.UnitTests.csproj", "{40A4EAA4-7A4D-4B85-8D60-92E9C716DEC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VendingMachine.App.UnitTests", "VendingMachine.App.Tests\VendingMachine.App.UnitTests.csproj", "{40A4EAA4-7A4D-4B85-8D60-92E9C716DEC5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ReadMeFirst", "ReadMeFirst", "{CF0BF633-E014-499D-A542-326BF47C9CCD}"
 	ProjectSection(SolutionItems) = preProject

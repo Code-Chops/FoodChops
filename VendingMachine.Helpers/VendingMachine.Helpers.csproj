@@ -1,15 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+	<Title>CodeChops.VendingMachine.Helpers</Title>
+	<AssemblyName>VendingMachine.Helpers</AssemblyName>
+	<RootNamespace>CodeChops.VendingMachine.Helpers</RootNamespace>
+	<TargetFramework>net6.0</TargetFramework>
 	<LangVersion>10</LangVersion>
     <AnalysisLevel>latest</AnalysisLevel>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-  </ItemGroup>
-
 </Project>

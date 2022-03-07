@@ -127,6 +127,6 @@
     <value>Inserted coins</value>
   </data>
   <data name="VendingMachine" xml:space="preserve">
-    <value>Available coins in vending machine</value>
+    <value>Available coins in machine</value>
   </data>
 </root>

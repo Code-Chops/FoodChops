@@ -1,21 +1,25 @@
-﻿@inherits WalletComponent
+﻿@using CodeChops.VendingMachine.App.Domain
+@using CodeChops.VendingMachine.App.Resources
 @using VendingMachine.App.DomainExtensions
-@using VendingMachine.Domain
 
-<div id="@this.Instance.Name" 
-     class="container wallet @(this.Instance.Name == WalletName.UserInserted ? "button-wallet" : "")" 
-     style="left: @(this.LocationInPercentages.X)%; top: @(this.LocationInPercentages.Y)%"
-     title="@this.Tooltip">
+<div id="@Instance.Type" 
+     class="container wallet @(Instance.Type == WalletType.UserInserted ? "button-wallet" : "")" 
+     style="left: @(LocationInPercentages.X)%; top: @(LocationInPercentages.Y)%"
+     title="@Tooltip"
+     @onclick="@(a => OnClick?.Invoke(null))">
 
-    <h5>@this.Instance.Name.GetName() (@GetAmountText(this.Instance.Amount) @this.Instance.Currency)</h5>
+    <h4>
+        @Instance.Type.GetName()<br/>
+        (@GetAmountText(Instance.Amount) @Instance.Currency.ToString())
+    </h4>
 
-    @foreach (var (coin, quantity) in this.Instance.OrderedCoinsWithQuantity.Reverse())
+    @foreach (var (coin, quantity) in Instance.OrderedCoinsWithQuantity.Reverse())
     {
-        <div class="row" @onclick="@(a => this.OnClick?.Invoke(coin))">
+        <div class="row" @onclick="@(a => OnClick?.Invoke(coin))">
             <div class="col-sm">
-                <img src="data:image/png;base64, @coin.RepresentedValue.GetImage()" 
-                     class=@(this.Instance.Name == WalletName.User ? "button-coin" : "") 
-                     alt=@(this.Instance.Name == WalletName.User ? "button-coin" : "")/>
+                <img src="data:image/png;base64, @coin.GetImage()" 
+                     class=@(Instance.Type == WalletType.User ? "coin button-coin" : "coin")
+                     alt=@(Instance.Type == WalletType.User ? "coin button-coin" : "coin"!) />
             </div>
             <div class="col-sm" style="align-self: center;">
                 @GetAmountText(quantity)
@@ -23,8 +27,29 @@
         </div>
     }
 
-    @if (!this.Instance.OrderedCoinsWithQuantity.Any())
+    @if (!Instance.OrderedCoinsWithQuantity.Any())
     {
         @:-
     }
 </div>
+
+@code {
+    [Parameter]
+	public Wallet Instance { get; set; } = null!;
+
+	[Parameter]
+	public Action<Coin?>? OnClick { get; set; }
+
+	[Parameter]
+	public Point LocationInPercentages { get; set; }
+
+	[Parameter]
+	public string Tooltip { get; set; } = null!;
+
+	internal static MarkupString GetAmountText(decimal? amount)
+	{
+		return amount is null
+			? (MarkupString)"<span class=\"infinite\">∞</span>"
+			: new MarkupString(amount.ToString()!);
+	}
+}

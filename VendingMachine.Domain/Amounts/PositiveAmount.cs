@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace VendingMachine.Helpers.Amounts;
+namespace CodeChops.VendingMachine.App.Domain.Amounts;
 
 /// <summary>
 /// A positive monetary amount.
@@ -10,7 +10,7 @@ public readonly struct PositiveAmount : IEquatable<PositiveAmount>, IComparable<
 {
 	public override string ToString() => this.ToDisplayString(CultureInfo.InvariantCulture);
 	public override int GetHashCode() => this.Value.GetHashCode();
-	public override bool Equals(object other) => (other is PositiveAmount positiveAmount && this.Equals(positiveAmount)) || (other is Amount amount && this.Equals(amount));
+	public override bool Equals(object? other) => other is PositiveAmount positiveAmount && this.Equals(positiveAmount) || other is Amount amount && this.Equals(amount);
 	public bool Equals(PositiveAmount other) => this.Value.Equals(other.Value);
 	public int CompareTo(PositiveAmount other) => this.Value.CompareTo(other.Value);
 	public bool Equals(Amount other) => this.Value.Equals(other.Value);
@@ -64,7 +64,7 @@ public readonly struct PositiveAmount : IEquatable<PositiveAmount>, IComparable<
 	/// </summary>
 	public PositiveAmount RoundToCents()
 	{
-		return (PositiveAmount)Decimal.Round(this.Value, 2, MidpointRounding.AwayFromZero);
+		return (PositiveAmount)decimal.Round(this.Value, 2, MidpointRounding.AwayFromZero);
 	}
 
 	/// <summary>
@@ -72,14 +72,14 @@ public readonly struct PositiveAmount : IEquatable<PositiveAmount>, IComparable<
 	/// </summary>
 	/// <param name="provider">A format provider, such as a culture. By default, the current culture is used.</param>
 	/// <param name="format">A decimal format string. See Decimal.ToString(string). By default, F2 (financial with 2 decimals) is used.</param>
-	public string ToDisplayString(IFormatProvider provider = null, string format = "F2") => ((Amount)this).ToDisplayString(provider, format);
+	public string ToDisplayString(IFormatProvider provider = null!, string format = "F2") => ((Amount)this).ToDisplayString(provider, format);
 
 	// Implicit to decimal, and explicit from (we cannot make assumptions about the sign)
 	public static implicit operator decimal(PositiveAmount positiveAmount) => positiveAmount.Value;
 	public static implicit operator PositiveAmount(decimal positiveAmount) => new Amount(positiveAmount).AssumePositive();
 
 	// Implicit to Amount, and explicit from (we cannot make assumptions about the sign)
-	public static implicit operator Amount(PositiveAmount positiveAmount) => new Amount(positiveAmount.Value);
+	public static implicit operator Amount(PositiveAmount positiveAmount) => new(positiveAmount.Value);
 	public static explicit operator PositiveAmount(Amount positiveAmount) => positiveAmount.AssumePositive();
 
 	#region Mathematical operators

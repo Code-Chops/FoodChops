@@ -1,68 +1,57 @@
-﻿using VendingMachine.Domain.Coins;
-using VendingMachine.Helpers.Amounts;
+﻿using CodeChops.MagicEnums;
+using CodeChops.VendingMachine.App.Domain.Amounts;
 
-namespace VendingMachine.Domain;
+namespace CodeChops.VendingMachine.App.Domain;
 
-public enum WalletName
+public record WalletType : MagicStringEnum<WalletType>
 {
-	User,
-	VendingMachine,
-	UserInserted,
-	Change,
+	public static WalletType User			{ get; } = CreateMember();
+	public static WalletType VendingMachine { get; } = CreateMember();
+	public static WalletType UserInserted	{ get; } = CreateMember();
+	public static WalletType Change			{ get; } = CreateMember();
 }
+
 
 /// <summary>
 /// A coin quantity of NULL means an unlimited amount of coins.
 /// </summary>
-public class Wallet
+public record Wallet
 {
-	public override string ToString() => $"{nameof(Wallet)} {nameof(Name)}:{this.Name.ToString()}, {this.Amount?.ToString() ?? "∞"}{this.Currency}";
+	public override string ToString() => $"{nameof(Wallet)} {nameof(Type)}:{this.Type}, {this.Amount?.ToString() ?? "∞"}{this.Currency}";
 
-	public WalletName Name { get; }
+	public WalletType Type { get; }
 
 	/// <summary>
 	/// Ordered by coin value. Make public getter that is of IReadOnlyDictionary, so data cannot be altered from outside.
 	/// </summary>
-	public IReadOnlyDictionary<CoinBase, uint?> OrderedCoinsWithQuantity =>
+	public IReadOnlyDictionary<Coin, uint?> OrderedCoinsWithQuantity =>
 		this._coinsWithQuantity
-			.OrderByDescending(coinWithQuantity => (decimal)coinWithQuantity.Key)
+			.OrderByDescending(coinWithQuantity => (decimal)coinWithQuantity.Key.Value)
 			.ToDictionary(
 				keySelector: coinWithQuantity => coinWithQuantity.Key,
 				elementSelector: coinWithQuantity => coinWithQuantity.Value);
 
-	private readonly Dictionary<CoinBase, uint?> _coinsWithQuantity;
+	private readonly Dictionary<Coin, uint?> _coinsWithQuantity;
 
 	public Currency Currency { get; }
 
 	public decimal? Amount => this._coinsWithQuantity.Values.Any(quantity => quantity is null)
-		? null 
-		: this._coinsWithQuantity.Sum(coinAndQuantity => coinAndQuantity.Key * coinAndQuantity.Value);
+		? null
+		: this._coinsWithQuantity.Sum(coinAndQuantity => coinAndQuantity.Key.Value * coinAndQuantity.Value);
 
 	public static implicit operator decimal?(Wallet wallet) => wallet.Amount;
 
-	public Wallet(WalletName name, Dictionary<CoinType, uint?> coinTypesWithQuantity, Currency? currency = null)
-		: this(
-			name,
-			coinsWithQuantity: coinTypesWithQuantity
-				.Select(coinTypeWithQuantity => (Coin: CoinBase.GetCoinByType(coinTypeWithQuantity.Key), Quantity: coinTypeWithQuantity.Value))
-				.ToDictionary(
-					keySelector: coindAndQuantity => coindAndQuantity.Coin,
-					elementSelector: coindAndQuantity => coindAndQuantity.Quantity), 
-			currency)
-	{
-	}
-
-	public Wallet(WalletName name, Dictionary<CoinBase, uint?> coinsWithQuantity, Currency? currency = null)
+	public Wallet(WalletType type, Dictionary<Coin, uint?> coinsWithQuantity, Currency? currency = null)
 	{
 		// Get the implementation of the coin type and create a dictionary with quantity as value
 		this._coinsWithQuantity = coinsWithQuantity;
 
 		if (coinsWithQuantity.Values.Any(quantity => quantity == 0))
 		{
-			throw new Exception($"A coin is defined for a {name} but no quantity is provided.");
+			throw new Exception($"A coin is defined for a {type} but no quantity is provided.");
 		}
 
-		this.Name = name;
+		this.Type = type;
 		this.Currency = ValidateWalletCurrency();
 
 		Currency ValidateWalletCurrency()
@@ -104,7 +93,7 @@ public class Wallet
 	/// <summary>
 	/// Transfer all coins of the source wallet.
 	/// </summary>
-	public void TransferAllCoins(Wallet destinationWallet)
+	public void TransferAllCoinsTo(Wallet destinationWallet)
 	{
 		// Create a new (materialized) list so this collection won't be modified.
 		// Therefore the enumeration below can procede.
@@ -152,7 +141,7 @@ public class Wallet
 	/// <summary>
 	/// I know transferring one coin at a time is not the most efficient, but it does it's job.
 	/// </summary>
-	public bool TransferOneCoin(Wallet destinationWallet, CoinBase coin)
+	public bool TransferOneCoin(Wallet destinationWallet, Coin coin)
 	{
 		if (destinationWallet.Currency != this.Currency)
 		{
@@ -167,7 +156,7 @@ public class Wallet
 		return this.RemoveCoin(coin) && destinationWallet.AddCoin(coin);
 	}
 
-	private bool RemoveCoin(CoinBase coin)
+	private bool RemoveCoin(Coin coin)
 	{
 		// Add the coin to the destination wallet
 		if (!this._coinsWithQuantity.TryGetValue(coin, out var coinQuantity))
@@ -192,7 +181,7 @@ public class Wallet
 		return true;
 	}
 
-	private bool AddCoin(CoinBase coin)
+	private bool AddCoin(Coin coin)
 	{
 		// Add the coin to the wallet
 		if (this._coinsWithQuantity.TryGetValue(coin, out var destinationCoinQuantity))
@@ -224,18 +213,19 @@ public class Wallet
 	public Wallet? CalculateChangeWithLowestCoinQuantity(decimal deposit)
 	{
 		var changeWallet = new Wallet(
-			name: WalletName.Change,
-			coinsWithQuantity: new Dictionary<CoinBase, uint?>(),
+			type: WalletType.Change,
+			coinsWithQuantity: new Dictionary<Coin, uint?>(),
 			currency: this.Currency);
 
 		var availableCoinsWallet = new Wallet(
-			name: WalletName.VendingMachine,
-			coinsWithQuantity: new Dictionary<CoinBase, uint?>(this._coinsWithQuantity),
+			type: WalletType.VendingMachine,
+			coinsWithQuantity: new Dictionary<Coin, uint?>(this._coinsWithQuantity),
 			currency: this.Currency);
 
 		return GoIntoNode(deposit) ? changeWallet : null;
 
-		bool GoIntoNode(decimal remainingDeposit, CoinBase? coin = null)
+
+		bool GoIntoNode(decimal remainingDeposit, Coin? coin = null)
 		{
 			if (coin != null)
 			{
@@ -250,7 +240,7 @@ public class Wallet
 
 			foreach (var coinToCheck in availableCoinsWallet.OrderedCoinsWithQuantity.Keys)
 			{
-				if (coin != null && coinToCheck.Value > coin) continue;
+				if (coin != null && coinToCheck.Value > coin.Value) continue;
 
 				var succeeded = GoIntoNode(remainingDeposit, coinToCheck);
 				if (succeeded) return true;

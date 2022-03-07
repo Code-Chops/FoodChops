@@ -1,11 +1,10 @@
 using System.Globalization;
+using CodeChops.VendingMachine.App.Domain;
+using CodeChops.VendingMachine.App.Domain.Amounts;
+using CodeChops.VendingMachine.App.Services;
 using Microsoft.JSInterop;
-using VendingMachine.App.Services;
-using VendingMachine.Domain;
-using VendingMachine.Domain.Coins;
-using VendingMachine.Helpers.Amounts;
 
-namespace VendingMachine.App;
+namespace CodeChops.VendingMachine.App;
 
 public class Startup
 {
@@ -29,44 +28,44 @@ public class Startup
 		services.AddScoped<JsInterop>();
 		services.AddScoped<SoundPlayer>();
 
-		var machineCurrency = Currency.Eur;
+		var machineCurrency = Currency.EUR;
 		var machine = new Machine(
 			productStacks: new[]										// Extra products can easily be added without consequence
 			{
-				new ProductStack(new Product(type: ProductType.Tea,         price: new PositiveMoney(machineCurrency, 1.30m)), availablePortions: 10),
-				new ProductStack(new Product(type: ProductType.Espresso,    price: new PositiveMoney(machineCurrency, 1.80m)), availablePortions: 20),
-				new ProductStack(new Product(type: ProductType.Juice,       price: new PositiveMoney(machineCurrency, 1.80m)), availablePortions: 20),
-				new ProductStack(new Product(type: ProductType.ChickenSoup, price: new PositiveMoney(machineCurrency, 1.80m)), availablePortions: 15),
+				new ProductStack(new(type: ProductType.Tea,         price: new(machineCurrency, 1.30m)), availablePortions: 10),
+				new ProductStack(new(type: ProductType.Espresso,    price: new(machineCurrency, 1.80m)), availablePortions: 20),
+				new ProductStack(new(type: ProductType.Juice,       price: new(machineCurrency, 1.80m)), availablePortions: 20),
+				new ProductStack(new(type: ProductType.ChickenSoup, price: new(machineCurrency, 1.80m)), availablePortions: 15),
 			},
 			horizontalProductStackCount: 2,                             // Try to set this to 1, for example
 			availableCoinsWallet: new Wallet(
-				name: WalletName.VendingMachine,
-				coinTypesWithQuantity: new Dictionary<CoinType, uint?>()
+				type: WalletType.VendingMachine,
+				coinsWithQuantity: new Dictionary<Coin, uint?>()
 				{
-					[CoinType.EurCent10]	= 100,
-					[CoinType.EurCent20]	= 100,
-					[CoinType.EurCent50]	= 100,
-					[CoinType.Eur1]			= 100,
+					[Coin.EurCent10] = 100,
+					[Coin.EurCent20] = 100,
+					[Coin.EurCent50] = 100,
+					[Coin.Eur1] = 100,
 				}),
 			userInsertedCoinsWallet: new Wallet(
-				name: WalletName.UserInserted,
-				coinTypesWithQuantity: new Dictionary<CoinType, uint?>(),
+				type: WalletType.UserInserted,
+				coinsWithQuantity: new Dictionary<Coin, uint?>(),
 				currency: machineCurrency),
-			color: new Random().NextDouble() < 0.5						// Create some randomness, because: why not?
-				? MachineColor.Blue 
+			color: new Random().NextDouble() < 0.5                      // Create some randomness, because: why not?
+				? MachineColor.Blue
 				: MachineColor.Red
 		);
 
 		services.AddScoped(serviceProvider => machine);
 
 		var user = new User(wallet: new Wallet(
-			name: WalletName.User,
-			coinTypesWithQuantity: new Dictionary<CoinType, uint?>()
+			type: WalletType.User,
+			coinsWithQuantity: new Dictionary<Coin, uint?>()
 			{
-				[CoinType.EurCent10]	= null,							// The user has an indefinite amount of coins. Lucky person.
-				[CoinType.EurCent20]	= null,
-				[CoinType.EurCent50]	= null,
-				[CoinType.Eur1]			= null,
+				[Coin.EurCent10] = null,                            // The user has an indefinite amount of coins. Lucky person.
+				[Coin.EurCent20] = null,
+				[Coin.EurCent50] = null,
+				[Coin.Eur1] = null,
 			}));
 
 		services.AddScoped(serviceProvider => user);
@@ -82,20 +81,6 @@ public class Startup
 			options.SupportedUICultures = supportedCultures;
 		});
 	}
-
-	// Normally I would use Autofac for dependency injection as it can automatically register and resolve dependencies.
-	// But it would be overkill for this application, because the amount of needed injection is very small.
-
-	//public void ConfigureContainer(ContainerBuilder builder)
-	//{
-	//	// Register dependencies using Autofac
-	//	//builder.RegisterAssemblyTypes(typeof(Startup).Assembly,
-	//	//		typeof(DomainExtensions.GuiVendingMachine).Assembly)
-	//	//	.AsImplementedInterfaces()
-	//	//	.AsSelf()
-	//	//	.SingleInstance();
-	//	builder.RegisterInstance(machine);
-	//}
 
 	// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 	public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -134,5 +119,4 @@ public static class ApplicationBuilderExtensions
 		CultureInfo.CurrentCulture = culture;
 		CultureInfo.CurrentUICulture = culture;
 	}
-
 }

@@ -1,4 +1,4 @@
-namespace VendingMachine.App;
+namespace CodeChops.VendingMachine.App;
 
 public class Program
 {

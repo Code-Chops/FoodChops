@@ -1,6 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <AssemblyName>VendingMachine.Domain.UnitTests</AssemblyName>
+    <RootNamespace>CodeChops.VendingMachine.Domain.UnitTests</RootNamespace>
     <TargetFramework>net6.0</TargetFramework>
 	<LangVersion>10</LangVersion>
     <AnalysisLevel>latest</AnalysisLevel>

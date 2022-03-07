@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CodeChops.VendingMachine.Resources {
+namespace CodeChops.VendingMachine.App.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace CodeChops.VendingMachine.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CodeChops.VendingMachine.Resources.General", typeof(General).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CodeChops.VendingMachine.App.Resources.General", typeof(General).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

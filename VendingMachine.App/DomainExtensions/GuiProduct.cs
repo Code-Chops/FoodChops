@@ -1,9 +1,8 @@
-﻿using System.Drawing;
-using System.Globalization;
-using VendingMachine.App.Resources;
-using VendingMachine.Domain;
+﻿using System.Globalization;
+using CodeChops.VendingMachine.App.Domain;
+using CodeChops.VendingMachine.App.Resources;
 
-namespace VendingMachine.App.DomainExtensions;
+namespace CodeChops.VendingMachine.App.DomainExtensions;
 
 internal static class GuiProduct
 {
@@ -11,7 +10,7 @@ internal static class GuiProduct
 	{
 		var productImageName = productType.ToString();
 		var image = (byte[]?)Images.ResourceManager.GetObject(productImageName)
-		            ?? throw new Exception($"{nameof(productImageName)} {productImageName} not found.");
+					?? throw new Exception($"{nameof(productImageName)} {productImageName} not found.");
 
 		return Convert.ToBase64String(image);
 	}
@@ -27,5 +26,4 @@ internal static class GuiProduct
 	{
 		return Products.ResourceManager.GetString(productType.ToString(), culture);
 	}
-
 }

@@ -1,13 +1,13 @@
-﻿using VendingMachine.App.Resources;
-using VendingMachine.Domain.Coins;
+﻿using CodeChops.VendingMachine.App.Domain;
+using CodeChops.VendingMachine.App.Resources;
 
-namespace VendingMachine.App.DomainExtensions;
+namespace CodeChops.VendingMachine.App.DomainExtensions;
 
 internal static class GuiCoin
 {
-	public static string GetImage(this CoinType coinType)
+	public static string GetImage(this Coin coin)
 	{
-		var coinImageName = $"Coin{coinType.ToString()}";
+		var coinImageName = $"Coin{coin}";
 		var image = (byte[]?)Images.ResourceManager.GetObject(coinImageName)
 					?? throw new Exception($"{nameof(coinImageName)} {coinImageName} not found.");
 

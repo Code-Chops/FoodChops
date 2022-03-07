@@ -1,13 +1,14 @@
-﻿using VendingMachine.Helpers.Amounts;
+﻿using CodeChops.MagicEnums;
+using CodeChops.VendingMachine.App.Domain.Amounts;
 
-namespace VendingMachine.Domain;
+namespace CodeChops.VendingMachine.App.Domain;
 
-public enum ProductType
+public record ProductType : MagicStringEnum<ProductType>
 {
-	Tea,
-	Espresso,
-	Juice,
-	ChickenSoup,
+	public static ProductType Tea	{ get; }		= CreateMember();
+	public static ProductType Espresso { get; }		= CreateMember();
+	public static ProductType Juice { get; }		= CreateMember();
+	public static ProductType ChickenSoup { get; }	= CreateMember();
 }
 
 public class Product
@@ -22,5 +23,4 @@ public class Product
 		this.Type = type;
 		this.Price = price;
 	}
-
 }

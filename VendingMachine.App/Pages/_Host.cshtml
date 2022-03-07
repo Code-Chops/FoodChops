@@ -11,26 +11,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=0.65, user-scalable=no" /> 
     <meta name="theme-color" content="#112042" />
     <link rel="icon" href="favicon.ico" type="image/png" sizes="32x32" />
-    <title>@VendingMachine.App.Resources.General.Title</title>
+    <title>@CodeChops.VendingMachine.App.Resources.General.Title</title>
     <base href="~/" />
 
-    <!-- for ios 7 style, multi-resolution icon of 152x152 -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-barstyle" content="black-translucent">
-    <link rel="apple-touch-icon" href="icon-152.png">
-    <!-- for Chrome on Android, multi-resolution icon of 196x196 -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <link rel="shortcut icon" sizes="196x196" href="icon-196.png">
-        
-
-    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
-    <link href="css/site.css" rel="stylesheet" />
+@*    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+*@    <link href="css/site.css" rel="stylesheet" />
     <script src="scripts/App.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Righteous|Amatic+SC:700" rel="stylesheet" />
 </head>
 <body>
     <app>
-        @(await Html.RenderComponentAsync<VendingMachine.App.App>(RenderMode.ServerPrerendered))
+        @(await Html.RenderComponentAsync<CodeChops.VendingMachine.App.App>(RenderMode.ServerPrerendered))
     </app>
 
     <div id="blazor-error-ui">

@@ -1,6 +1,4 @@
-﻿To be honest, the resources being used should be bought, but I used and edited them (with my poor paint.NET skills) without doing so.
-The sources:
-
+﻿Sources of the resources:
 
 SOUNDS:
 

@@ -7,7 +7,6 @@ namespace VendingMachine.Helpers.Amounts;
 /// A monetary currency.
 /// Can be created by casting, from a currency code string or from an ISO numeric currency code (u)short.
 /// </summary>
-[JsonConverter(typeof(CurrencyJsonConverter))]
 public sealed class Currency : IEquatable<Currency>, IComparable<Currency>, IEquatable<string>, IComparable<string> // Class to avoid struct's unremovable public default constructor
 {
 	public static readonly Currency Eur = new Currency("EUR", 978, "€", 2);
@@ -109,24 +108,4 @@ public sealed class Currency : IEquatable<Currency>, IComparable<Currency>, IEqu
 
 	// Implicit to short, and explicit from (as we cannot assume that just any short is an ISO numeric currency code)
 	public static explicit operator Currency(short isoNumericCurrencyCode) => GetByIsoNumericCode((ushort)isoNumericCurrencyCode);
-}
-
-internal class CurrencyJsonConverter : JsonConverter
-{
-	public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-	{
-		var currency = (Currency)value;
-		writer.WriteValue(currency.Code);
-	}
-
-	public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-	{
-		var currencyCode = (string)reader.Value;
-		return (Currency)currencyCode;
-	}
-
-	public override bool CanConvert(Type objectType)
-	{
-		return objectType == typeof(Currency);
-	}
 }

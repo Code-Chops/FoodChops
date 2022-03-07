@@ -1,4 +1,4 @@
-﻿namespace VendingMachine.Domain;
+﻿namespace CodeChops.VendingMachine.App.Domain;
 
 public class User
 {
