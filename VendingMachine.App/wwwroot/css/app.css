@@ -19,7 +19,7 @@ h1 {
 
 h4 {
     margin-top: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     text-size-adjust: none;
 }
 
@@ -153,7 +153,13 @@ app {
 
 .footer {
     position: absolute;
-    top: 95%;
+    top: 101%;
+    width: 100%;
+}
+
+.see-below {
+    position: absolute;
+    top: 860px;
     width: 100%;
 }
 
@@ -180,5 +186,9 @@ app {
 
     .container {
         margin-top: 0;
+    }
+
+    .footer {
+        top: 95%;
     }
 }

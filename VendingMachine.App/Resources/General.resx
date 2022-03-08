@@ -118,17 +118,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Copyright" xml:space="preserve">
-    <value>© Made by Max Bergman</value>
+    <value>© Made by CodeChops</value>
   </data>
   <data name="Explanation" xml:space="preserve">
-    <value>This machine will give change with the least quantity of coins possible.&lt;br/&gt;
-Press the user's wallet coins to insert them into the machine.&lt;br/&gt;
-Press the inserted coins to eject all the inserted coins.</value>
+    <value>Press the user's coins to insert them into the machine.&lt;br/&gt;
+Press the inserted coins wallet to eject all the coins.</value>
   </data>
   <data name="SeeBelow" xml:space="preserve">
-    <value>Scroll down to select the coins.</value>
+    <value>▼ Scroll down to select the coins ▼</value>
+  </data>
+  <data name="Subtitle" xml:space="preserve">
+    <value>A solution to the vending machine change problem.</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Max's vending machine</value>
+    <value>FoodChops</value>
   </data>
 </root>

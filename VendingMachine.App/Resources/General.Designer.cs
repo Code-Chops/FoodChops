@@ -61,7 +61,7 @@ namespace CodeChops.VendingMachine.App.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to © Made by Max Bergman.
+        ///   Looks up a localized string similar to © Made by CodeChops.
         /// </summary>
         public static string Copyright {
             get {
@@ -70,9 +70,8 @@ namespace CodeChops.VendingMachine.App.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This machine will give change with the least quantity of coins possible.&lt;br/&gt;
-        ///Press the user&apos;s wallet coins to insert them into the machine.&lt;br/&gt;
-        ///Press the inserted coins to eject all the inserted coins..
+        ///   Looks up a localized string similar to Press the user&apos;s coins to insert them into the machine.&lt;br/&gt;
+        ///Press the inserted coins wallet to eject all the coins..
         /// </summary>
         public static string Explanation {
             get {
@@ -81,7 +80,7 @@ namespace CodeChops.VendingMachine.App.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Scroll down to select the coins..
+        ///   Looks up a localized string similar to ▼ Scroll down to select the coins ▼.
         /// </summary>
         public static string SeeBelow {
             get {
@@ -90,7 +89,16 @@ namespace CodeChops.VendingMachine.App.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Max&apos;s vending machine.
+        ///   Looks up a localized string similar to A solution to the vending machine change problem..
+        /// </summary>
+        public static string Subtitle {
+            get {
+                return ResourceManager.GetString("Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FoodChops.
         /// </summary>
         public static string Title {
             get {
