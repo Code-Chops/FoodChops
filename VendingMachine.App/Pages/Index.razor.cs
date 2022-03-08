@@ -44,51 +44,47 @@ public class VendingMachineComponent : ComponentBase
 
 	internal async Task OnClickBuyProduct()
 	{
-		// Cannot buy a product if no product is selected
+		// Cannot buy a product if no product is selected.
 		if (this.SelectedProductStack is null) return;
 
+		// Check for insufficient amount.
 		if (this.SelectedProductStack.Product.Price > this.Machine.UserInsertedCoinsWallet.Amount)
 		{
-			this.Message = new MarkupString(Resources.Messages.InsufficientAmount);
-			await this.SoundPlayer.Play(SoundName.Error);
-			await Task.Delay(800);
-			this.Message = null;
+			await ShowMessageAndUpdateStacks(message: Resources.Messages.InsufficientAmount, soundName: SoundName.Error);
 			return;
 		}
 
 		var coinChangeWallet = this.Machine.BuyProduct(this.User, this.SelectedProductStack);
+		
+		// Check if unable to provide change.
 		if (coinChangeWallet is null)
 		{
-			this.Message = new MarkupString(Resources.Messages.UnableToProvideChange);
-			await this.SoundPlayer.Play(SoundName.Error);
+			await ShowMessageAndUpdateStacks(message: Resources.Messages.UnableToProvideChange, soundName: SoundName.Error);
+			return;
+		}
 
+		// Give back change.
+		if (coinChangeWallet.Amount > 0)
+		{
+			await this.SoundPlayer.Play(SoundName.CoinDrop);
+			this.CoinChangeWallet = coinChangeWallet;
+		}
+
+		await ShowMessageAndUpdateStacks(message: Resources.Messages.ThankYou, soundName: SoundName.ProductDrop, removeSelection: true);
+
+
+		async Task ShowMessageAndUpdateStacks(string message, SoundName soundName, bool removeSelection = false)
+		{
+			this.Message = new MarkupString(message);
+			await this.SoundPlayer.Play(soundName);
+			this.UpdateView();
 			await Task.Delay(800);
 			this.Message = null;
-		}
-		else
-		{
-			if (coinChangeWallet.Amount > 0)
-			{
-				await this.SoundPlayer.Play(SoundName.CoinDrop);
 
-				this.CoinChangeWallet = coinChangeWallet;
-			}
-			else
-			{
-				this.CoinChangeWallet = null;
-			}
-
-			await this.SoundPlayer.Play(SoundName.ProductDrop);
-
-			this.Message = new MarkupString(Resources.Messages.ThankYou);
-
+			if (removeSelection) this.SelectedProductStack = null;
 			this.StateHasChanged();
-			await Task.Delay(800);
 			this.Message = this.Machine.GetMessageIfAvailable();
 		}
-
-		this.SelectedProductStack = null;
-		this.UpdateView();
 	}
 
 	internal async Task UserInsertsCoin(Coin? coin)

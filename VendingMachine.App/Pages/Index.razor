@@ -62,7 +62,7 @@
         var sizeB = GuiMachine.BuyButtonSize;
     }
     <div style="position: absolute; left:@(offsetB.X)px;top: @(offsetB.Y)px; width: @(sizeB.Width)px; height: @(sizeB.Height)px; z-index:10; color: @(this.SelectedProductStack != null ? "black" : "grey"); line-height: @(sizeB.Height)px"
-        @onclick=@OnClickBuyProduct
+        @onclick=@(async () => await OnClickBuyProduct())
         title="@Resources.Tooltips.Buy"
         class="button">
         <strong>
@@ -75,7 +75,7 @@
 @if (this.CoinChangeWallet != null)
 {
     <_Wallet Instance="this.CoinChangeWallet" 
-            LocationInPercentages="new Point(5, 58)" />
+        LocationInPercentages="new Point(5, 58)" />
 }
 
 <_Wallet Instance="this.User.Wallet" 
@@ -89,4 +89,4 @@
             Tooltip="@Resources.Tooltips.UserInsertedCoinsWallet" />
 
 <_Wallet Instance="this.Machine.AvailableCoinsWallet" 
-            LocationInPercentages="new Point(75, 58)" />
+    LocationInPercentages="new Point(75, 58)" />

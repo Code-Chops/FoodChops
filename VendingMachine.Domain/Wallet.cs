@@ -25,38 +25,32 @@ public record Wallet
 	/// Ordered by coin value. Make public getter that is of IReadOnlyDictionary, so data cannot be altered from outside.
 	/// </summary>
 	public IReadOnlyDictionary<Coin, uint?> OrderedCoinsWithQuantity =>
-		this._coinsWithQuantity
+		this.CoinsWithQuantity
 			.OrderByDescending(coinWithQuantity => (decimal)coinWithQuantity.Key.Value)
 			.ToDictionary(
 				keySelector: coinWithQuantity => coinWithQuantity.Key,
 				elementSelector: coinWithQuantity => coinWithQuantity.Value);
 
-	private readonly Dictionary<Coin, uint?> _coinsWithQuantity;
+	private Dictionary<Coin, uint?> CoinsWithQuantity { get; }
 
 	public Currency Currency { get; }
 
-	public decimal? Amount => this._coinsWithQuantity.Values.Any(quantity => quantity is null)
+	public decimal? Amount => this.CoinsWithQuantity.Values.Any(quantity => quantity is null)
 		? null
-		: this._coinsWithQuantity.Sum(coinAndQuantity => coinAndQuantity.Key.Value * coinAndQuantity.Value);
+		: this.CoinsWithQuantity.Sum(coinAndQuantity => coinAndQuantity.Key.Value * coinAndQuantity.Value);
 
 	public static implicit operator decimal?(Wallet wallet) => wallet.Amount;
 
 	public Wallet(WalletType type, Dictionary<Coin, uint?> coinsWithQuantity, Currency? currency = null)
 	{
 		// Get the implementation of the coin type and create a dictionary with quantity as value
-		this._coinsWithQuantity = coinsWithQuantity;
-
-		if (coinsWithQuantity.Values.Any(quantity => quantity == 0))
-		{
-			throw new Exception($"A coin is defined for a {type} but no quantity is provided.");
-		}
-
+		this.CoinsWithQuantity = coinsWithQuantity;
 		this.Type = type;
 		this.Currency = ValidateWalletCurrency();
 
 		Currency ValidateWalletCurrency()
 		{
-			var uniqueCoinCurrencies = this._coinsWithQuantity
+			var uniqueCoinCurrencies = this.CoinsWithQuantity
 				.Keys
 				.Select(coin => coin.Value.Currency)
 				.Distinct()
@@ -70,12 +64,12 @@ public record Wallet
 
 			if (currency is null)
 			{
-				if (!this._coinsWithQuantity.Any())
+				if (!this.CoinsWithQuantity.Any())
 				{
 					throw new Exception("Cannot create wallet: Currency is unknown when no coins are provided.");
 				}
 
-				return this._coinsWithQuantity.First().Key.Value.Currency;
+				return this.CoinsWithQuantity.First().Key.Value.Currency;
 			}
 			else
 			{
@@ -87,7 +81,6 @@ public record Wallet
 				return currency;
 			}
 		}
-
 	}
 
 	/// <summary>
@@ -97,7 +90,7 @@ public record Wallet
 	{
 		// Create a new (materialized) list so this collection won't be modified.
 		// Therefore the enumeration below can procede.
-		var coinsAndQuantity = this._coinsWithQuantity
+		var coinsAndQuantity = this.CoinsWithQuantity
 			.Select(coinAndQuantity => (coinAndQuantity.Key, coinAndQuantity.Value))
 			.ToList();
 
@@ -115,7 +108,6 @@ public record Wallet
 		}
 	}
 
-
 	/// <summary>
 	/// Deposit coins using the smallest quantity of coins possible.
 	/// </summary>
@@ -127,7 +119,7 @@ public record Wallet
 
 		if (wallet is null) return null;
 
-		foreach (var (coin, quantity) in wallet._coinsWithQuantity)
+		foreach (var (coin, quantity) in wallet.CoinsWithQuantity)
 		{
 			for (var i = 0; i < quantity; i++)
 			{
@@ -148,7 +140,7 @@ public record Wallet
 			throw new Exception("The currency should be the same of the wallets that transfer money.");
 		}
 
-		if (!this._coinsWithQuantity.TryGetValue(coin, out var sourceWalletCoinQuantity) || sourceWalletCoinQuantity == 0)
+		if (!this.CoinsWithQuantity.TryGetValue(coin, out var sourceWalletCoinQuantity) || sourceWalletCoinQuantity == 0)
 		{
 			return false;
 		}
@@ -159,7 +151,7 @@ public record Wallet
 	private bool RemoveCoin(Coin coin)
 	{
 		// Add the coin to the destination wallet
-		if (!this._coinsWithQuantity.TryGetValue(coin, out var coinQuantity))
+		if (!this.CoinsWithQuantity.TryGetValue(coin, out var coinQuantity))
 		{
 			return false;
 		}
@@ -171,10 +163,10 @@ public record Wallet
 			case 0:
 				throw new Exception($"{coin} should already have been removed from {this}");
 			case 1:
-				this._coinsWithQuantity.Remove(coin);
+				this.CoinsWithQuantity.Remove(coin);
 				break;
 			default:
-				this._coinsWithQuantity[coin]--;
+				this.CoinsWithQuantity[coin]--;
 				break;
 		}
 
@@ -184,13 +176,13 @@ public record Wallet
 	private bool AddCoin(Coin coin)
 	{
 		// Add the coin to the wallet
-		if (this._coinsWithQuantity.TryGetValue(coin, out var destinationCoinQuantity))
+		if (this.CoinsWithQuantity.TryGetValue(coin, out var destinationCoinQuantity))
 		{
-			if (destinationCoinQuantity != null) this._coinsWithQuantity[coin]++;
+			if (destinationCoinQuantity != null) this.CoinsWithQuantity[coin]++;
 		}
 		else
 		{
-			this._coinsWithQuantity.Add(coin, 1);
+			this.CoinsWithQuantity.Add(coin, 1);
 		}
 
 		return true;
@@ -219,7 +211,7 @@ public record Wallet
 
 		var availableCoinsWallet = new Wallet(
 			type: WalletType.VendingMachine,
-			coinsWithQuantity: new Dictionary<Coin, uint?>(this._coinsWithQuantity),
+			coinsWithQuantity: new Dictionary<Coin, uint?>(this.CoinsWithQuantity),
 			currency: this.Currency);
 
 		return GoIntoNode(deposit) ? changeWallet : null;

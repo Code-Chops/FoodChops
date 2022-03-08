@@ -1,4 +1,6 @@
-﻿@using CodeChops.VendingMachine.App.Domain
+﻿@inherits CodeChops.VendingMachine.App.Components.WalletComponent;
+
+@using CodeChops.VendingMachine.App.Domain
 @using CodeChops.VendingMachine.App.Resources
 @using VendingMachine.App.DomainExtensions
 
@@ -32,24 +34,3 @@
         @:-
     }
 </div>
-
-@code {
-    [Parameter]
-	public Wallet Instance { get; set; } = null!;
-
-	[Parameter]
-	public Action<Coin?>? OnClick { get; set; }
-
-	[Parameter]
-	public Point LocationInPercentages { get; set; }
-
-	[Parameter]
-	public string Tooltip { get; set; } = null!;
-
-	internal static MarkupString GetAmountText(decimal? amount)
-	{
-		return amount is null
-			? (MarkupString)"<span class=\"infinite\">∞</span>"
-			: new MarkupString(amount.ToString()!);
-	}
-}
