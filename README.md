@@ -15,10 +15,14 @@ A lot can be configured in FoodChops.App.Startup.ConfigureServices
 
 ## Sounds
 
-CoinInsert		-> https://freesound.org/people/arnaud%20coutancier/sounds/271295/
-ButtonClick		-> https://freesound.org/people/JarredGibb/sounds/219479/
-CoinDrop			-> https://freesound.org/people/PerMagnusLindborg/sounds/324241/
-ProductDrop		-> https://freesound.org/people/felipelnv/sounds/153306/
+CoinInsert:<br/>
+https://freesound.org/people/arnaud%20coutancier/sounds/271295/
+ButtonClick:<br/>
+https://freesound.org/people/JarredGibb/sounds/219479/
+CoinDrop:<br/>
+https://freesound.org/people/PerMagnusLindborg/sounds/324241/
+ProductDrop:<br/>
+https://freesound.org/people/felipelnv/sounds/153306/
 
 ## Images
 
