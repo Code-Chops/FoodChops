@@ -1,5 +1,7 @@
 # FoodChops
 
+> Live demo: https://foodchops.azurewebsites.net/
+
 An optimized, visual solution to the [vending machine / change making problem](https://en.wikipedia.org/wiki/Change-making_problem), using ServerSide Blazor.
 
 The view state is shared between every client.
