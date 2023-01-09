@@ -17,10 +17,13 @@ A lot can be configured in FoodChops.App.Startup.ConfigureServices
 
 CoinInsert:<br/>
 https://freesound.org/people/arnaud%20coutancier/sounds/271295/
+
 ButtonClick:<br/>
 https://freesound.org/people/JarredGibb/sounds/219479/
+
 CoinDrop:<br/>
 https://freesound.org/people/PerMagnusLindborg/sounds/324241/
+
 ProductDrop:<br/>
 https://freesound.org/people/felipelnv/sounds/153306/
 
