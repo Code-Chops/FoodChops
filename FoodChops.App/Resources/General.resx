@@ -123,9 +123,6 @@
   <data name="ExplanationUserCoins" xml:space="preserve">
     <value>Press the user's coins to insert them into the machine.</value>
   </data>
-  <data name="ExplanationInsertedCoins" xml:space="preserve">
-    <value>Press the inserted coins wallet to eject all the coins.</value>
-  </data>
   <data name="SeeBelow" xml:space="preserve">
     <value>▼ Scroll down to select the coins ▼</value>
   </data>
@@ -134,5 +131,8 @@
   </data>
   <data name="Title" xml:space="preserve">
     <value>FoodChops</value>
+  </data>
+  <data name="ExplanationInsertedCoins" xml:space="preserve">
+    <value>Click here to eject all the coins.</value>
   </data>
 </root>
