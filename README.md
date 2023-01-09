@@ -35,7 +35,7 @@ https://www.freepik.com/free-vector/vending-machine-abstract-concept-vector-illu
 VendingMachine red/blue (edited by CodeChops):<br/>
 https://www.vectorstock.com/royalty-free-vector/realistic-snacks-vending-machine-vector-8427345
 
-FoodChopsFavicon:<br/>
+Favicon:<br/>
 https://images.app.goo.gl/K2TjBAEnqHc4ep6y6
 
 Coins (edited by CodeChops):<br/>
