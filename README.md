@@ -9,7 +9,7 @@ The view state is shared between every client.
 - Select a product and press 'buy'.
 - Click on the Inserted Coins wallet to release your inserted coins.
 
-A lot can be configured in FoodChops.App.Startup.ConfigureServices
+A lot can be configured in FoodChops.App.Startup.ConfigureServices.
 
 # Third party sources
 
