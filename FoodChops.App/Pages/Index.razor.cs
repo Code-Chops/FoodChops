@@ -45,7 +45,8 @@ public class FoodChopsComponent : ComponentBase
 	internal async Task OnClickBuyProduct()
 	{
 		// Cannot buy a product if no product is selected.
-		if (this.SelectedProductStack is null) return;
+		if (this.SelectedProductStack is null) 
+			return;
 
 		// Check for insufficient amount.
 		if (this.SelectedProductStack.Product.Price > this.Machine.UserInsertedCoinsWallet.Amount)
@@ -78,7 +79,7 @@ public class FoodChopsComponent : ComponentBase
 		this.Message = new MarkupString(message);
 		await this.SoundPlayer.Play(soundName);
 		this.UpdateView();
-		await Task.Delay(800);
+		await Task.Delay(1000);
 		this.Message = null;
 
 		if (removeSelection) this.SelectedProductStack = null;

@@ -42,7 +42,7 @@
 
         @* Product price *@
         <div class="product-info" style="z-index: 10; position: absolute; left:@(GuiMachine.PriceLocation.X)px;top: @(GuiMachine.PriceLocation.Y)px">
-            @SelectedProductStack?.Product.Price.Currency <br/>
+            @Machine.Currency.Symbol
             @SelectedProductStack?.Product.Price.Amount
         </div>
     }

@@ -6,7 +6,7 @@ namespace CodeChops.FoodChops.App.DomainExtensions;
 internal static class GuiMachine
 {
 	public static Size ProductWindowSize			{ get; } = new(180, 280);
-	public static Point PriceLocation				{ get; } = new(283, 236);
+	public static Point PriceLocation				{ get; } = new(273, 253);
 	public static Point ProductWindowOffset			{ get; } = new(75, 41);
 
 	public static Point BuyButtonOffset				{ get; } = new(270, 33);

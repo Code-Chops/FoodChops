@@ -26,20 +26,20 @@ public class Startup
 		var machine = new Machine(
 			productStacks: new[]
 			{
-				new ProductStack(new(type: ProductType.Candy,   price: new(machineCurrency, 1.30m)), availablePortions: 6),
-				new ProductStack(new(type: ProductType.Coffee,  price: new(machineCurrency, 1.80m)), availablePortions: 14),
+				new ProductStack(new(type: ProductType.Candy,   price: new(machineCurrency, 1.00m)), availablePortions: 6),
+				new ProductStack(new(type: ProductType.Coffee,  price: new(machineCurrency, 1.40m)), availablePortions: 14),
 				new ProductStack(new(type: ProductType.Beer,    price: new(machineCurrency, 1.80m)), availablePortions: 11),
-				new ProductStack(new(type: ProductType.Soup,	price: new(machineCurrency, 1.80m)), availablePortions: 8),
+				new ProductStack(new(type: ProductType.Soup,	price: new(machineCurrency, 1.30m)), availablePortions: 8),
 			},
 			horizontalProductStackCount: 2,
 			availableCoinsWallet: new Wallet(
 				type: WalletType.FoodChops,
 				coinsWithQuantity: new Dictionary<Coin, uint?>()
 				{
-					[Coin.EurCent10] = 100,
-					[Coin.EurCent20] = 100,
-					[Coin.EurCent50] = 100,
-					[Coin.Eur1] = 100,
+					[Coin.EurCent10] = 20,
+					[Coin.EurCent20] = 10,
+					[Coin.EurCent50] = 15,
+					[Coin.Eur1] = 8,
 				}),
 			userInsertedCoinsWallet: new Wallet(
 				type: WalletType.UserInserted,

@@ -24,6 +24,7 @@ h1 {
 h4 {
     margin-top: 10px;
     margin-bottom: 10px;
+    font-weight: 100;
 }
 
 .message {
@@ -146,7 +147,7 @@ app {
 
 .product-selected {
     opacity: 1 !important;
-    filter: drop-shadow(0 0 6px rgba(255, 255, 255, .5)) brightness(1.4) !important;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, .7)) brightness(1.2) !important;
 }
 
 .infinite {

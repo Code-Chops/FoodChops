@@ -19,7 +19,7 @@
 		<RepositoryUrl>https://github.com/code-chops/FoodChops</RepositoryUrl>
 		<RepositoryType>Git</RepositoryType>
 		<Copyright>Copyright (c) CodeChops $([System.DateTime]::Now.ToString(yyyy))</Copyright>
-		<Description>A solution to the vending machine change problem, using ServerSide Blazor.</Description>
+		<Description>An optimized solution to the vending machine change problem, using ServerSide Blazor.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>
