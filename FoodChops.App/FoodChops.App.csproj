@@ -1,0 +1,140 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <Version>2.0.0</Version>
+    <TargetFramework>net7.0</TargetFramework>
+	<LangVersion>11</LangVersion>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+   	<Title>FoodChops.App</Title>
+    <RootNamespace>CodeChops.FoodChops.App</RootNamespace>
+  	<PackageId>CodeChops.FoodChops</PackageId>
+	<Authors>CodeChops (@Code-Chops), Max Bergman</Authors>
+    <Company>CodeChops</Company>
+  	<RepositoryUrl>https://github.com/code-chops/FoodChops</RepositoryUrl>
+	<RepositoryType>Git</RepositoryType>
+  	<Copyright>Copyright (c) CodeChops $([System.DateTime]::Now.ToString(yyyy))</Copyright>
+	<Description>A solution to the vending machine change problem, using ServerSide Blazor.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FoodChops.Domain\FoodChops.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<InternalsVisibleTo Include="$(AssemblyName).UnitTests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.9.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\General.NL.resx">
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\General.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>General.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Images.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Images.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Messages.NL.resx">
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Messages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Products.NL.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Products.resx">
+      <LastGenOutput>Products.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Tooltips.NL.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Tooltips.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Tooltips.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\WalletName.resx">
+      <SubType>Designer</SubType>
+      <LastGenOutput>WalletName.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\WalletName.NL.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\sounds\ButtonClick.wav" />
+    <None Include="wwwroot\sounds\CoinDrop.wav" />
+    <None Include="wwwroot\sounds\CoinInsert.wav" />
+    <None Include="wwwroot\sounds\ProductDrop.wav" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\General.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>General.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Images.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Images.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Messages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Products.Designer.cs">
+      <DependentUpon>Products.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Resources\Tooltips.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Tooltips.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\WalletName.Designer.cs">
+      <DependentUpon>WalletName.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\scripts\" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptJSXEmit>React</TypeScriptJSXEmit>
+    <TypeScriptModuleKind />
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>True</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir>wwwroot\scripts</TypeScriptOutDir>
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>False</TypeScriptSourceMap>
+	<TypeScriptMapRoot />
+	<TypeScriptRootDir>TypeScript</TypeScriptRootDir>
+  </PropertyGroup>
+</Project>

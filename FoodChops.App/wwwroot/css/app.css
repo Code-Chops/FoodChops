@@ -1,0 +1,205 @@
+html {
+    font-family: 'Righteous', Charcoal, sans-serif;
+    color: black;
+    text-align: center;
+    background-color: #87405e;
+
+    /* Disable text selection */
+    -webkit-touch-callout: none;    /* iOS Safari */
+    -webkit-user-select: none;      /* Safari */
+    -khtml-user-select: none;       /* Konqueror HTML */
+    -moz-user-select: none;         /* Old versions of Firefox */
+    -ms-user-select: none;          /* Internet Explorer/Edge */
+    user-select: none;              /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
+}
+
+h1 {
+    margin-top: 0;
+}
+
+h4 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.message {
+    font-weight: 100;
+}
+
+.row {
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: 15px;
+}
+
+.col-sm {
+    flex-basis: 0;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 100%;
+}
+
+/* Disable dragging of images */
+img {
+    -webkit-user-drag:  none;
+    -khtml-user-drag:   none;
+    -moz-user-drag:     none;
+    -o-user-drag:       none;
+    user-drag:          none;
+}
+
+app {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.top-row{
+    height: 3.5rem;
+    display: block;
+    align-items: center;
+}
+
+.main {
+    flex: 1;
+}
+
+#blazor-error-ui {
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}
+
+.machine {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative
+}
+
+    .machine img {
+        vertical-align: middle;
+    }
+
+.wallet {
+    border-color: currentColor;
+    border-width: thin;
+    border-style: double;
+    border-radius: 5px;
+    max-width: 500px;
+    background-color: rgb(255 255 255 / 10%);
+}
+
+.button-wallet:hover {
+    -webkit-box-shadow: 0 0 6px 0 rgb(225, 225, 225);
+    -moz-box-shadow: 0 0 6px 0 rgb(225, 225, 225);
+    box-shadow: 0 0 6px 0 rgb(225, 225, 225);
+    cursor: pointer;
+}
+
+.button:hover {
+    opacity: 1;
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, .5)) brightness(1.1);
+    cursor: pointer;
+}
+
+.button-coin:hover {
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    -webkit-box-shadow: 0 0 6px 0 rgb(225, 225, 225);
+    -moz-box-shadow: 0 0 6px 0 rgb(225, 225, 225);
+    box-shadow: 0 0 6px 0 rgb(225, 225, 225);
+    cursor: pointer;
+}
+
+.button-buy:hover {
+    -webkit-box-shadow: 0 0 6px 0 rgb(225, 225, 225);
+    -moz-box-shadow: 0 0 6px 0 rgb(225, 225, 225);
+    box-shadow: 0 0 6px 0 rgb(225, 225, 225);
+    cursor: pointer;
+    background-color: white;
+    opacity: .3;
+}
+
+.product-selected {
+    opacity: 1 !important;
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, .5)) brightness(1.4) !important;
+}
+
+.infinite {
+    font-size: 2em;
+    vertical-align: sub;
+    line-height: 0;
+}
+
+.coin {
+    transform: scale(.9);
+}
+
+.footer {
+    position: absolute;
+    top: 101%;
+    width: 100%;
+    margin-left: -65px;
+}
+
+.footer > a:not(:hover) {
+    color: black;
+}
+
+.footer > a:hover {
+    color: #b58c9e;
+}
+
+.see-below {
+    position: absolute;
+    width: 100%;
+}
+
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 10px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 30px
+}
+
+/* Make it responsive */
+@media (min-width: 1200px) {
+    .wallet {
+        max-width: 20%;
+        position: absolute;
+        width: 30%;
+    }
+
+    .see-below {
+        display: none;
+    }
+
+    .container {
+        margin-top: 0;
+    }
+
+    .footer {
+        top: 95%;
+    }
+}
+
+.title {
+    color: #b58c9e;
+}

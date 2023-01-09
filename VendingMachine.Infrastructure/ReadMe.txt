@@ -1,1 +1,0 @@
-﻿This would be a library that defines the ORM and saves / loads from the database for persistance.

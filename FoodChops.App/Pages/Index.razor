@@ -1,0 +1,96 @@
+﻿@inherits FoodChopsComponent
+@using CodeChops.FoodChops.App.Domain
+@using FoodChops.App.DomainExtensions
+@page "/"
+
+<div class="machine">
+    <img src="data:image/png;base64, @Machine.Theme.GetImage()" 
+            title="@Resources.Tooltips.FoodChops" 
+            id="@nameof(Domain.Machine)" alt="@Resources.Tooltips.FoodChops"/>
+
+    @if (Message is null)
+    {
+        @for (var y = 0; y < Machine.ProductStackGridSize.Height; y++)
+        {
+            @for (var x = 0; x < Machine.ProductStackGridSize.Width; x++)
+            {
+                var stack = (ProductStack?)Machine.ProductStacksByLocation.GetValue(x, y);
+                if (stack is {AvailablePortions: > 0 })
+                {
+                    var isSelected = SelectedProductStack == stack;
+                    var productSizeInPixels = GuiProduct.GetSizeInPixels(Machine);
+                    var stackOffset = Machine.GetProductStackOffsetInPixels(new Point(x, y));
+
+                    @* Available portions *@
+                    <span style="position: absolute; left:@(stackOffset.X-4)px;top: @(stackOffset.Y)px;z-index:10;color:#b58c9e;font-size: small;">
+                        @(stack.AvailablePortions)x
+                    </span>
+
+                    @* Product *@
+                    <div class="product" @onclick=@(() => OnClickProductStack(stack))>
+                        <img src="data:image/png;base64, @stack.Product.Type.GetImage()" 
+                            title="@stack.Product.Type.GetName()"
+                            alt="@stack.Product.Type.GetName()"
+                            style="position: absolute; left:@(stackOffset.X)px;top: @(stackOffset.Y)px;"
+                            class="button @(isSelected ? "product-selected" :"")"
+                            width="@productSizeInPixels.Width"
+                            height="@productSizeInPixels.Height"/>
+                    </div>
+                }
+            }
+        }
+
+        @* Product price *@
+        <div class="product-info" style="z-index: 10; position: absolute; left:@(GuiMachine.PriceLocation.X)px;top: @(GuiMachine.PriceLocation.Y)px">
+            @SelectedProductStack?.Product.Price.Currency <br/>
+            @SelectedProductStack?.Product.Price.Amount
+        </div>
+    }
+    else
+    {
+        @* Message *@
+        var offsetE = GuiMachine.ProductWindowOffset;
+        var sizeE = GuiMachine.ProductWindowSize;
+        <div style="position: absolute; left:@(offsetE.X)px;top: @(offsetE.Y + sizeE.Height / 2)px; width: @(sizeE.Width)px; height: @(sizeE.Height)px; z-index:10; color: #b58c9e;">
+            @((MarkupString)Message)
+        </div>
+    }
+
+    @* Buy button *@
+    @{
+        var offsetB = GuiMachine.BuyButtonOffset;
+        var sizeB = GuiMachine.BuyButtonSize;
+    }
+    <div style="position: absolute; left:@(offsetB.X)px;top: @(offsetB.Y)px; width: @(sizeB.Width)px; height: @(sizeB.Height)px; z-index:10; color: @(SelectedProductStack != null ? "black" : "#b58c9e"); line-height: @(sizeB.Height * .75)px"
+        @onclick=@(async () => await OnClickBuyProduct())
+        title="@Resources.Tooltips.Buy"
+        class="button button-buy">
+        <strong>
+            @Resources.Tooltips.Buy.ToUpper()
+        </strong>
+    </div>
+</div>
+
+<div class="see-below">@Resources.General.SeeBelow</div>
+
+@* Wallets *@
+@if (CoinChangeWallet != null)
+{
+    <_Wallet Instance="CoinChangeWallet" 
+             LocationInPercentages="new Point(3, 80)" />
+}
+
+<_Wallet Instance="User.Wallet" 
+         LocationInPercentages="new Point(3, 1)" 
+         OnClick="async (coin) => await UserInsertsCoin(coin)"
+         Tooltip="@Resources.Tooltips.UserWallet"
+         Message="@Resources.General.ExplanationUserCoins"/>
+
+<_Wallet Instance="Machine.UserInsertedCoinsWallet" 
+         LocationInPercentages="new Point(75, 1)" 
+         OnClick="async _ => await ReleaseCoins()"
+         Tooltip="@Resources.Tooltips.InsertedCoinsWallet"
+         Message="@Resources.General.ExplanationInsertedCoins" />
+
+<_Wallet Instance="Machine.AvailableCoinsWallet" 
+    LocationInPercentages="new Point(75, 80)" />

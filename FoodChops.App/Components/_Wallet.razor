@@ -1,0 +1,40 @@
+﻿@inherits CodeChops.FoodChops.App.Components.WalletComponent;
+
+@using CodeChops.FoodChops.App.Domain
+@using CodeChops.FoodChops.App.Resources
+@using FoodChops.App.DomainExtensions
+
+<div id="@Instance.Type" 
+     class="container wallet @(Instance.Type == WalletType.UserInserted ? "button-wallet" : "")" 
+     style="left: @(LocationInPercentages.X)%; top: @(LocationInPercentages.Y)%"
+     title="@Tooltip"
+     @onclick="@(a => OnClick?.Invoke(null))">
+    
+    <h4>
+        @Instance.Type.GetName()<br/>
+        (@GetAmountText(Instance.Amount) @Instance.Currency.ToString())
+    </h4>
+
+    <h5 class="message">
+        @(Message)
+    </h5>
+    
+    @foreach (var (coin, quantity) in Instance.OrderedCoinsWithQuantity.Reverse())
+    {
+        <div class="row" @onclick="@(a => OnClick?.Invoke(coin))">
+            <div class="col-sm">
+                <img src="data:image/png;base64, @coin.GetImage()" 
+                     class=@(Instance.Type == WalletType.User ? "coin button-coin" : "coin")
+                     alt=@(Instance.Type == WalletType.User ? "coin button-coin" : "coin") />
+            </div>
+            <div class="col-sm" style="align-self: center;">
+                @GetAmountText(quantity)
+            </div>
+        </div>
+    }
+
+    @if (!Instance.OrderedCoinsWithQuantity.Any())
+    {
+        @:-
+    }
+</div>
