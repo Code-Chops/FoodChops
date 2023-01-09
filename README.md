@@ -4,6 +4,8 @@ A solution to the vending machine change problem, using ServerSide Blazor.
 
 The view state is shared between every client.
 
+> Check out [CodeChops projects](https://www.CodeChops.nl/projects) for more projects.
+
 # Usage
 - Click on coins in the User's wallet to put them in the machine.
 - Select a product and press 'buy'.
