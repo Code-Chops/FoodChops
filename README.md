@@ -3,6 +3,9 @@
 An optimized, visual solution to the [vending machine / change making problem](https://en.wikipedia.org/wiki/Change-making_problem), using ServerSide Blazor.
 
 The view state is shared between every client.
+A lot can be configured in FoodChops.App.Startup.ConfigureServices, like: products, amounts, currency and the theme of the vending machine.
+
+### Live demo: https://foodchops.azurewebsites.net/
 
 > Check out [CodeChops projects](https://www.CodeChops.nl/projects) for more projects.
 
@@ -10,8 +13,6 @@ The view state is shared between every client.
 - Click on coins in the User's wallet to put them in the machine.
 - Select a product and press 'buy'.
 - Click on the Inserted Coins wallet to release your inserted coins.
-
-A lot can be configured in FoodChops.App.Startup.ConfigureServices.
 
 # Third party sources
 
