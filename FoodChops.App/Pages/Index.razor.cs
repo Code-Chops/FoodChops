@@ -71,20 +71,19 @@ public class FoodChopsComponent : ComponentBase
 		}
 
 		await ShowMessageAndUpdateStacks(message: Resources.Messages.ThankYou, soundName: SoundName.ProductDrop, removeSelection: true);
+	}
 
+	private async Task ShowMessageAndUpdateStacks(string message, SoundName soundName, bool removeSelection = false)
+	{
+		this.Message = new MarkupString(message);
+		await this.SoundPlayer.Play(soundName);
+		this.UpdateView();
+		await Task.Delay(800);
+		this.Message = null;
 
-		async Task ShowMessageAndUpdateStacks(string message, SoundName soundName, bool removeSelection = false)
-		{
-			this.Message = new MarkupString(message);
-			await this.SoundPlayer.Play(soundName);
-			this.UpdateView();
-			await Task.Delay(800);
-			this.Message = null;
-
-			if (removeSelection) this.SelectedProductStack = null;
-			this.StateHasChanged();
-			this.Message = this.Machine.GetMessageIfAvailable();
-		}
+		if (removeSelection) this.SelectedProductStack = null;
+		this.StateHasChanged();
+		this.Message = this.Machine.GetMessageIfAvailable();
 	}
 
 	internal async Task UserInsertsCoin(Coin? coin)
@@ -103,7 +102,7 @@ public class FoodChopsComponent : ComponentBase
 			return;
 
 		this.Machine.UserInsertedCoinsWallet.TransferAllCoinsTo(this.User.Wallet);
-		await this.SoundPlayer.Play(SoundName.CoinDrop);
+		await ShowMessageAndUpdateStacks(message: Resources.Messages.MoneyEjected, soundName: SoundName.CoinDrop, removeSelection: false);
 		this.CoinChangeWallet = null;
 		this.UpdateView();
 	}

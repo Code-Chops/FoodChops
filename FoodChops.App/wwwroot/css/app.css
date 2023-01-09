@@ -13,6 +13,10 @@ html {
     user-select: none;              /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
 }
 
+a {
+    color: black;
+}
+
 h1 {
     margin-top: 0;
 }
@@ -160,10 +164,6 @@ app {
     top: 101%;
     width: 100%;
     margin-left: -65px;
-}
-
-.footer > a:not(:hover) {
-    color: black;
 }
 
 .footer > a:hover {

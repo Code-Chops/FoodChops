@@ -70,7 +70,7 @@ namespace CodeChops.FoodChops.App.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Click here to eject all the coins..
+        ///   Looks up a localized string similar to Click here to eject all coins..
         /// </summary>
         public static string ExplanationInsertedCoins {
             get {
@@ -97,7 +97,7 @@ namespace CodeChops.FoodChops.App.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A solution to the vending machine change problem..
+        ///   Looks up a localized string similar to A solution to the &lt;a href=&quot;https://en.wikipedia.org/wiki/Change-making_problem&quot; target=&quot;_blank&quot;&gt;vending machine / change making problem&lt;/a&gt;..
         /// </summary>
         public static string Subtitle {
             get {

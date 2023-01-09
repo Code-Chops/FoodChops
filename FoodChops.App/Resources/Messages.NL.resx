@@ -120,6 +120,9 @@
   <data name="InsufficientAmount" xml:space="preserve">
     <value>Bedrag onvoldoende</value>
   </data>
+  <data name="MoneyEjected" xml:space="preserve">
+    <value>Geld uitgeworpen</value>
+  </data>
   <data name="NoCoinsAvailable" xml:space="preserve">
     <value>Geen munten beschikbaar</value>
   </data>

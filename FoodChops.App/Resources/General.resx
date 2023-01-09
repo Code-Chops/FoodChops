@@ -127,12 +127,12 @@
     <value>▼ Scroll down to select the coins ▼</value>
   </data>
   <data name="Subtitle" xml:space="preserve">
-    <value>A solution to the vending machine change problem.</value>
+    <value>A solution to the &lt;a href="https://en.wikipedia.org/wiki/Change-making_problem" target="_blank"&gt;vending machine / change making problem&lt;/a&gt;.</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>FoodChops</value>
   </data>
   <data name="ExplanationInsertedCoins" xml:space="preserve">
-    <value>Click here to eject all the coins.</value>
+    <value>Click here to eject all coins.</value>
   </data>
 </root>

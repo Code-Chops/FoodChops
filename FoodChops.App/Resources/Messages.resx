@@ -120,6 +120,9 @@
   <data name="InsufficientAmount" xml:space="preserve">
     <value>Insufficient amount</value>
   </data>
+  <data name="MoneyEjected" xml:space="preserve">
+    <value>Money ejected</value>
+  </data>
   <data name="NoCoinsAvailable" xml:space="preserve">
     <value>No coins available</value>
   </data>

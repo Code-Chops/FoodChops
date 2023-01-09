@@ -70,6 +70,15 @@ namespace CodeChops.FoodChops.App.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Money ejected.
+        /// </summary>
+        internal static string MoneyEjected {
+            get {
+                return ResourceManager.GetString("MoneyEjected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No coins available.
         /// </summary>
         internal static string NoCoinsAvailable {
