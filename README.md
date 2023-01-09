@@ -1,6 +1,6 @@
 # FoodChops
 
-A solution to the vending machine change problem, using ServerSide Blazor.
+A solution to the vending machine / change making problem, using ServerSide Blazor.
 
 The view state is shared between every client.
 
