@@ -103,7 +103,7 @@ public class Startup
 
 public static class ApplicationBuilderExtensions
 {
-	public static void UseBrowserLocalisation(this IApplicationBuilder app, JSRuntime jsRuntime)
+	public static void UseBrowserLocalisation(this IApplicationBuilder _, JSRuntime jsRuntime)
 	{
 		var browserLocale = ((IJSInProcessRuntime)jsRuntime).Invoke<string>("blazoredLocalisation.getBrowserLocale");
 		var culture = new CultureInfo(browserLocale);

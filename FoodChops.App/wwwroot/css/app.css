@@ -160,16 +160,15 @@ app {
     transform: scale(.9);
 }
 
-.footer {
+.copyright {
     position: absolute;
-    top: 101%;
+    top: 100%;
     width: 100%;
-    margin-left: -65px;
 }
 
-.footer > a:hover {
-    color: #b58c9e;
-}
+    .copyright > a:hover {
+        color: #b58c9e;
+    }
 
 .see-below {
     position: absolute;
@@ -201,8 +200,9 @@ app {
         margin-top: 0;
     }
 
-    .footer {
-        top: 95%;
+    .copyright {
+        top: 94.9%;
+        margin-left: -67px;
     }
 }
 
