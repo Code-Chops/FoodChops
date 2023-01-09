@@ -121,7 +121,7 @@
     <value>Kopen</value>
   </data>
   <data name="InsertedCoinsWallet" xml:space="preserve">
-    <value>Klik hier om de ingevoerde munten vrij te geven (betaling annuleren)</value>
+    <value>Klik hier om de ingevoerde munten vrij te geven</value>
   </data>
   <data name="UserWallet" xml:space="preserve">
     <value>Klik op een munt om het in de machine te gooien</value>

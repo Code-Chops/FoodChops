@@ -60,7 +60,7 @@ namespace CodeChops.FoodChops.App.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to © Made by CodeChops.
+        ///   Looks up a localized string similar to © CodeChops / third parties.
         /// </summary>
         public static string Copyright {
             get {

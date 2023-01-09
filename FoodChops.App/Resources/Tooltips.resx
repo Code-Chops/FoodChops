@@ -121,7 +121,7 @@
     <value>Buy</value>
   </data>
   <data name="InsertedCoinsWallet" xml:space="preserve">
-    <value>Click here to release the machine coins (cancel purchase)</value>
+    <value>Click here to release the machine coins</value>
   </data>
   <data name="UserWallet" xml:space="preserve">
     <value>Click a coin to enter it into the machine</value>

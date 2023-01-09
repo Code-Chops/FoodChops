@@ -1,24 +1,47 @@
-Here is my Vending Machine app. It uses C# 10, .NET 6 with Blazor
+# FoodChops
 
-I wanted to show what could be possible if an official app would be written (and expanded), so therefore I added extra features.
-For example:
-- The machine can use a different currency than EUR
-- The quantity of product stacks can be highered / lowered
-- The vending machine has 2 different versions (at random): a blue and a red one
-- Resources are used to support different languages
-- TypeScript and JsInterop is used so JavaScript can play different sounds
-- The views are made responsive
-- The state of the view is shared between multiple clients
-- The component's logic is placed in a code-behind
+A solution to the vending machine change problem, using ServerSide Blazor.
 
-If I would have more time, I would have implemented:
-- Made the property ProductStacksByLocation on the class ProductStack immutable instead of an array
-- Create a class that can handle calculating with nullable decimals as amount (where NULL means infinite)
-- Coin drag-and-drop functionality and show the machine money on the machine itself
+The view state is shared between every client.
 
-FoodChops.App.StartUp.cs is a good place to start reading the code.
+# Usage
+- Click on coins in the User's wallet to put them in the machine.
+- Select a product and press 'buy'.
+- Click on the Inserted Coins wallet to release your inserted coins.
 
-Usage:
-Click on the Inserted Coins wallet to release your coins
-Click on coins in the User's wallet to put them in the machine
 A lot can be configured in FoodChops.App.Startup.ConfigureServices
+
+# Third party sources
+
+## Sounds
+
+CoinInsert			-> https://freesound.org/people/arnaud%20coutancier/sounds/271295/
+ButtonClick			-> https://freesound.org/people/JarredGibb/sounds/219479/
+CoinDrop			-> https://freesound.org/people/PerMagnusLindborg/sounds/324241/
+ProductDrop			-> https://freesound.org/people/felipelnv/sounds/153306/
+
+## Images
+
+VendingMachine new (edited by CodeChops):
+https://www.freepik.com/free-vector/vending-machine-abstract-concept-vector-illustration-vending-business-selfservice-machine-snacks-beverages-small-business-takeaway-coffee-public-space-commerce-abstract-metaphor_24070886.htm#query=vending%20machines&position=1&from_view=search&track=sph
+
+VendingMachine red/blue (edited by CodeChops):
+https://www.vectorstock.com/royalty-free-vector/realistic-snacks-vending-machine-vector-8427345
+
+FoodChopsFavicon:
+https://images.app.goo.gl/K2TjBAEnqHc4ep6y6
+
+Coins (edited by CodeChops):
+https://www.vectorstock.com/royalty-free-vector/all-european-union-euro-coins-vector-23993703
+
+Candy (edited by CodeChops):
+https://pixabay.com/vectors/candy-bonbon-wrapped-confectionery-304391/
+
+Soup (edited by CodeChops):
+https://www.flaticon.com/free-icon/hot-soup-bowl_14018
+
+Beer (edited by CodeChops):
+https://freesvgplanet.com/beer-bottle-svg-free-beers-svg-free-decorative-beers-svg-drink-bottle-svg-cheers-svg-free-svg-cutting-files-dring-svg-beer-svg-dxf/
+
+Coffee (edited by CodeChops):
+https://pixabay.com/vectors/animation-coffee-cup-icon-1297198/

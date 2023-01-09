@@ -126,6 +126,11 @@ app {
     cursor: pointer;
 }
 
+.button-buy {
+    font-size: x-small !important;
+    font-weight: bold;
+}
+
 .button-buy:hover {
     -webkit-box-shadow: 0 0 6px 0 rgb(225, 225, 225);
     -moz-box-shadow: 0 0 6px 0 rgb(225, 225, 225);

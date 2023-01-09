@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Copyright" xml:space="preserve">
-    <value>© Gemaakt door CodeChops</value>
+    <value>© CodeChops / derden</value>
   </data>
   <data name="SeeBelow" xml:space="preserve">
     <value>▼ Scroll naar beneden om de munten te selecteren ▼</value>

@@ -78,7 +78,7 @@ namespace CodeChops.FoodChops.App.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Click here to release the machine coins (cancel purchase).
+        ///   Looks up a localized string similar to Click here to release the machine coins.
         /// </summary>
         internal static string InsertedCoinsWallet {
             get {
