@@ -2,8 +2,8 @@
 
 An optimized, visual solution to the [vending machine / change making problem](https://en.wikipedia.org/wiki/Change-making_problem), using ServerSide Blazor.
 
-The view state is shared between every client.
-A lot can be configured in FoodChops.App.Startup.ConfigureServices, like: products, amounts, currency and the theme of the vending machine.
+The view state is shared between every client (this can lead to different languages being shown simultaneously).
+A lot can be configured in `FoodChops.App.Startup.ConfigureServices`, like: products, amounts, currency and the theme of the vending machine.
 
 ### Live demo: https://foodchops.azurewebsites.net/
 
